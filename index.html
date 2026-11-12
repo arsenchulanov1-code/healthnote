@@ -1438,7 +1438,7 @@ footer .foot{container-type:inline-size}
 <script>/* show the preloader before the heavy scripts arrive; never for an emergency card link */
 (function(){var d=document.documentElement,p=document.getElementById("preloader");var calm=false;try{calm=localStorage.getItem("hn_motion")==='"off"';}catch(e){}if(calm)d.classList.add("calm");if(calm||/^#card-/.test(location.hash)||!p) return;d.classList.add("preloading");p.hidden=false;setTimeout(function(){if(d.classList.contains("preloading")){d.classList.remove("preloading");d.classList.add("intro");p.hidden=true;}},9000);})();</script>
 <div class="curtain" id="curtain" hidden aria-hidden="true"><div class="cur-cols"><i></i><i></i><i></i><i></i><i></i></div><div class="cur-mid"><svg class="mark" width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle class="mk-ring" cx="20" cy="21" r="14" fill="none" stroke="var(--jade)" stroke-width="4" stroke-linecap="round" stroke-dasharray="66 22"/><rect class="mk-disp" x="25.7" y="7.1" width="11" height="11" rx="3" fill="#EEF1F6" transform="rotate(-37 31.2 12.6)"/><path class="mk-pulse" pathLength="1" d="M10.5 21h4.5l2.6-6.5 4.4 13 2.6-6.5h4.9" fill="none" stroke="#EEF1F6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="cur-k" id="curK"></span><b class="cur-t" id="curTitle"></b></div></div>
-<div class="cursor" id="cursor" aria-hidden="true"><span class="c-label" id="cursorLabel"></span></div><div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
 <a class="skip" href="#stats" data-i="skipLink"></a>
 <header class="top" id="siteHeader">
   <div class="wrap">
@@ -3066,32 +3066,6 @@ $('timerReset').addEventListener('click',()=>{ tm.acc=0; tm.run=false; cancelAni
 
 /* ---------- pointer effects (mouse only) ---------- */
 if(fine && !reduced){
-  // cursor: exact dot + lagging ring. Ring inverts over controls, turns into a labelled disc over big links and the 3D stage, a text beam over fields
-  const cur=$('cursor'), dot=$('cursorDot'), lbl=$('cursorLabel'); let cx=-100, cy=-100, tx=-100, ty=-100, shown=false, mode='';
-  root.classList.add('has-cursor');
-  const CL={ru:{open:'Открыть',drag:'Крутить',scan:'Скан'},en:{open:'Open',drag:'Drag',scan:'Scan'},kk:{open:'Ашу',drag:'Бұрау',scan:'Скан'}};
-  function cursorMode(el){
-    if(!el || !el.closest) return '';
-    if(el.closest('input:not([type=range]):not([type=checkbox]),textarea')) return 'txt';
-    if(el.closest('.ex,.nextpage')) return 'lbl:open';
-    if(el.closest('#brCanvas')) return 'lbl:drag';
-    if(el.closest('#heroVisual') && !el.closest('button,a')) return 'lbl:drag';
-    if(el.closest('.mini-qr,.qr-frame')) return 'lbl:scan';
-    if(el.closest('.btn')) return 'btn';
-    if(el.closest('a,button,summary,select,label,input,.swatch')) return 'hot';
-    return '';
-  }
-  addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse') return; tx=e.clientX; ty=e.clientY;
-    if(!shown){ shown=true; cx=tx; cy=ty; cur.classList.add('on'); dot.classList.add('on'); }
-    const m=cursorMode(e.target); if(m===mode) return; mode=m;
-    cur.classList.toggle('hot',m==='hot'); cur.classList.toggle('btnm',m==='btn'); dot.classList.toggle('btnm',m==='btn'); cur.classList.toggle('txt',m==='txt'); dot.classList.toggle('txt',m==='txt');
-    cur.classList.toggle('lbl',m.startsWith('lbl')); if(m.startsWith('lbl')) lbl.textContent=(CL[lang]||CL.en)[m.slice(4)];
-  },{passive:true});
-  addEventListener('pointerdown',()=>cur.classList.add('down')); addEventListener('pointerup',()=>cur.classList.remove('down'));
-  document.addEventListener('pointerleave',()=>{ shown=false; cur.classList.remove('on'); dot.classList.remove('on'); });
-  (function follow(){ cx+=(tx-cx)*.18; cy+=(ty-cy)*.18;
-    cur.style.transform=`translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0) translate(-50%,-50%)`;
-    dot.style.transform=`translate3d(${tx}px,${ty}px,0) translate(-50%,-50%)`; requestAnimationFrame(follow); })();
   // buttons: the fill circle starts where the pointer came in and leaves where it went out
   document.addEventListener('pointerover',e=>{ const b=e.target.closest && e.target.closest('.btn'); if(!b || b.contains(e.relatedTarget)) return; const r=b.getBoundingClientRect();
     b.style.setProperty('--fx',((e.clientX-r.left)/r.width*100).toFixed(1)+'%'); b.style.setProperty('--fy',((e.clientY-r.top)/r.height*100).toFixed(1)+'%'); });
