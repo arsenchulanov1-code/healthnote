@@ -1415,6 +1415,19 @@ footer .foot{container-type:inline-size}
 .ecard-blood b{font-size:clamp(44px,10vw,64px)}
 
 @media (hover:none){.ex{-webkit-backdrop-filter:none;backdrop-filter:none}}
+
+
+/* hero: the bracelet comes apart on click/tap */
+.hero-visual{pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.hero-visual:focus-visible{outline:2px solid var(--jade);outline-offset:-8px;border-radius:var(--r-lg)}
+.pchip.skipchip{display:none}
+.tap-hint{display:flex;align-items:center;gap:10px;color:var(--hero-muted);transition:opacity .4s}
+.tap-dot{position:relative;width:12px;height:12px;border-radius:50%;background:var(--hero-accent)}
+.tap-dot::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:1.5px solid var(--hero-accent);animation:tapPing 1.8s var(--ease-out) infinite}
+@keyframes tapPing{from{transform:scale(.5);opacity:1}to{transform:scale(1.4);opacity:0}}
+@media (max-width:880px){
+  .scroll-hint.tap-hint{display:flex;position:relative;left:auto;right:auto;bottom:auto;transform:none;justify-content:center;margin:4px 0 0;padding:0 16px;font-size:14px}
+}
 /*V6CSS-END*/
 
 /* "calm" mode: the visitor turned animations off with the switch in the footer */
@@ -1540,7 +1553,7 @@ footer .foot{container-type:inline-size}
         </div>
       </div>
     </div>
-    <div class="scroll-hint" id="scrollHint" aria-hidden="true"><span class="mouse"></span><span data-i="scrollHint"></span></div>
+    <div class="scroll-hint tap-hint" id="scrollHint" aria-hidden="true"><span class="tap-dot"></span><span data-i="tapHint"></span></div>
   </section>
   </div>
 
@@ -2122,7 +2135,7 @@ for(const l in T3) Object.assign(T[l],T3[l]);
 const T4={
 ru:{eyebrow:"Медицинский браслет с QR‑кодом",
   heroAria:"Анимация: браслет HealthNote разбирается на дисплей, аккумулятор, кнопку и ремешок",
-  heroPartsAria:"Детали браслета", scrollHint:"Прокрутите, чтобы разобрать браслет",
+  heroPartsAria:"Детали браслета", scrollHint:"Прокрутите, чтобы разобрать браслет", tapHint:"Нажмите на браслет, чтобы разобрать его", tapHintClose:"Нажмите ещё раз, чтобы собрать",
   xcDisplay:"Дисплей", xcBattery:"Батарея", xcButton:"Кнопка", xcBand:"Браслет",
   xpDisplayH:"E‑ink дисплей с QR", xpDisplayP:"Показывает QR‑код медкарты. Картинка остаётся даже без заряда.",
   xpBatteryH:"Аккумулятор", xpBatteryP:"Тонкий Li‑Po на 180 мА·ч. Одной зарядки хватает примерно на месяц.",
@@ -2134,7 +2147,7 @@ ru:{eyebrow:"Медицинский браслет с QR‑кодом",
   sp5k:"Питание", sp5v:"Аккумулятор 180 мА·ч, около месяца без подзарядки"},
 kk:{eyebrow:"QR‑кодты медициналық білезік",
   heroAria:"Анимация: HealthNote білезігі дисплейге, аккумуляторға, түймеге және бауға бөлшектенеді",
-  heroPartsAria:"Білезік бөлшектері", scrollHint:"Білезікті бөлшектеу үшін төмен айналдырыңыз",
+  heroPartsAria:"Білезік бөлшектері", scrollHint:"Білезікті бөлшектеу үшін төмен айналдырыңыз", tapHint:"Бөлшектеу үшін білезікті басыңыз", tapHintClose:"Жинау үшін қайта басыңыз",
   xcDisplay:"Дисплей", xcBattery:"Батарея", xcButton:"Түйме", xcBand:"Білезік",
   xpDisplayH:"QR‑кодты E‑ink дисплей", xpDisplayP:"Медкартаның QR‑кодын көрсетеді. Заряд біткенде де сурет сақталады.",
   xpBatteryH:"Аккумулятор", xpBatteryP:"180 мА·сағ жұқа Li‑Po. Бір зарядтау шамамен бір айға жетеді.",
@@ -2146,7 +2159,7 @@ kk:{eyebrow:"QR‑кодты медициналық білезік",
   sp5k:"Қуат", sp5v:"180 мА·сағ аккумулятор, зарядсыз шамамен бір ай"},
 en:{eyebrow:"Medical bracelet with a QR code",
   heroAria:"Animation: the HealthNote bracelet comes apart into its display, battery, button and band",
-  heroPartsAria:"Bracelet parts", scrollHint:"Scroll to take the bracelet apart",
+  heroPartsAria:"Bracelet parts", scrollHint:"Scroll to take the bracelet apart", tapHint:"Tap the bracelet to take it apart", tapHintClose:"Tap again to put it back together",
   xcDisplay:"Display", xcBattery:"Battery", xcButton:"Button", xcBand:"Band",
   xpDisplayH:"E‑ink display with QR", xpDisplayP:"Shows your medical card QR code. The image stays even with no charge.",
   xpBatteryH:"Battery", xpBatteryP:"A thin 180 mAh Li‑Po cell. One charge lasts about a month.",
@@ -2792,7 +2805,7 @@ if('IntersectionObserver' in window){ const bo=new IntersectionObserver(es=>{ if
     hero.style.setProperty('--head-h',headH+'px');
     const heroH=hero.offsetHeight;
     stickTop=Math.min(headH, vh-heroH);
-    range=Math.round(vh*1.8);
+    range=0;   // the bracelet comes apart on click, not on scroll
     hero.style.top=stickTop+'px'; scroller.style.height=(heroH+range)+'px';
   }
   var posA=[0,0], posB=[0,0], sA=1, sB=1; const bigQ=matchMedia('(min-width:881px) and (min-height:561px)');
@@ -2828,17 +2841,24 @@ if('IntersectionObserver' in window){ const bo=new IntersectionObserver(es=>{ if
   function progress(){ if(!range) return 0; return clamp((stickTop-scroller.getBoundingClientRect().top)/range); }
   const P0=.03, P1=.4, STEP=(1-P1)/4;
   const center=i=>P1+(i+.5)*STEP;
+  // apart = target state (0 assembled, 1 apart); sel = the part the visitor picked
+  let apart=0, sel=null;
+  function setApart(on){ apart=on?1:0; if(!on) sel=null; else if(!sel && narrow()) sel='display'; vis.classList.toggle('open',!!on); const hs=hint.querySelector('[data-i]'); hs.dataset.i=on?'tapHintClose':'tapHint'; hs.textContent=t(hs.dataset.i); }
   PARTS.forEach((p,i)=>chips[p].addEventListener('click',()=>{
-    const y=scrollY+scroller.getBoundingClientRect().top-stickTop+center(i)*range;
-    jump(Math.round(y),!reduced);
+    if(!apart){ setApart(true); sel=p; } else sel=(sel===p && !narrow())?null:p;
   }));
   hero.addEventListener('pointermove',e=>{ const r=hero.getBoundingClientRect(); mx=(e.clientX-r.left)/r.width-.5; my=(e.clientY-r.top)/r.height-.5; });
   hero.addEventListener('pointerleave',()=>{ mx=my=0; });
   // grab the bracelet and spin it; it coasts, then settles back to its pose
   let spin=0, spinV=0, grab=null;
-  vis.addEventListener('pointerdown',e=>{ if(e.target.closest('button,a')) return; grab=e.clientX; spinV=0; try{ vis.setPointerCapture(e.pointerId); }catch(err){} });
-  vis.addEventListener('pointermove',e=>{ if(grab===null) return; const d=(e.clientX-grab)*.011; grab=e.clientX; spin+=d; spinV=d; });
-  const drop=()=>{ grab=null; }; vis.addEventListener('pointerup',drop); vis.addEventListener('pointercancel',drop);
+  let down=null;
+  vis.addEventListener('pointerdown',e=>{ if(e.target.closest('button,a')) return; grab=e.clientX; down={x:e.clientX,y:e.clientY,moved:0}; spinV=0; try{ vis.setPointerCapture(e.pointerId); }catch(err){} });
+  vis.addEventListener('pointermove',e=>{ if(grab===null) return; const d=(e.clientX-grab)*.011; grab=e.clientX; spin+=d; spinV=d; if(down) down.moved=Math.max(down.moved,Math.hypot(e.clientX-down.x,e.clientY-down.y)); });
+  vis.addEventListener('pointerup',e=>{ const wasTap=down && down.moved<8 && !e.target.closest('button,a'); grab=null; down=null; if(wasTap) setApart(!apart); });
+  vis.addEventListener('pointercancel',()=>{ grab=null; down=null; });
+  // keyboard: the stage is a button too
+  vis.setAttribute('tabindex','0'); vis.setAttribute('role','button');
+  vis.addEventListener('keydown',e=>{ if((e.key==='Enter'||e.key===' ') && e.target===vis){ e.preventDefault(); setApart(!apart); } });
   let lastActive='-';
   function sync(){ PARTS.forEach(p=>chips[p].setAttribute('aria-pressed',String(active===p))); }
 
@@ -2887,17 +2907,13 @@ if('IntersectionObserver' in window){ const bo=new IntersectionObserver(es=>{ if
         else { renderer.setPixelRatio(.7); dust.visible=false; }
         renderer.setSize(W,H,false); } }
     const intro=reduced?1:smoother(clamp((now-t0-150)/1700));
-    const p=progress();
-    sp=reduced?p:damp(sp,p,.16,dt);               // smoothed scroll position
+    sp=reduced?apart:damp(sp,apart,.32,dt);       // 0 assembled → 1 apart, eased
     smx=damp(smx,mx,.35,dt); smy=damp(smy,my,.35,dt);
-    E=smoother(clamp((sp-P0)/(P1-P0)));          // 0 assembled → 1 apart
-    // which part is in focus: soft bumps around each part's scroll position
-    let best=-1, bw=0;
-    PARTS.forEach((pp,i)=>{ const w=E<.98?0:smoother(clamp(1-Math.abs(sp-center(i))/(STEP*.8)));
-      const edge=(i===3&&sp>center(3))?1:w; focus[pp]=reduced?(w>.5?1:0):damp(focus[pp],edge,.12,dt); if(edge>bw){bw=edge;best=i;} });
-    active=bw>.3?PARTS[best]:null;
+    E=smoother(clamp(sp));
+    // the part the visitor picked is in focus
+    PARTS.forEach(pp=>{ const w=(E>.9 && sel===pp)?1:0; focus[pp]=reduced?w:damp(focus[pp],w,.12,dt); });
+    active=E>.9?sel:null;
     const k=active||'-'; if(k!==lastActive){ lastActive=k; sync(); }
-    hint.classList.toggle('gone',p>.02);
     const pct=Math.round(E*100); if(pct!==lastPct){ lastPct=pct; $('hudVal').textContent=pct+'%'; $('hudBar').style.transform=`scaleX(${(E).toFixed(3)})`; hero.style.setProperty('--e',E.toFixed(3)); }
     if(frame++%30===0) drawScreen();
     // per-part explode, overlapping windows so the motion reads as one continuous move
