@@ -6,6 +6,20 @@
 <title>HealthNote — медицинский браслет с QR‑кодом</title>
 <meta name="description" content="HealthNote: браслет с QR‑кодом для людей, которые могут внезапно потерять сознание. Диагноз, первая помощь и номер близкого открываются камерой телефона за секунды.">
 <meta name="theme-color" content="#05070D">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="HealthNote">
+<meta property="og:title" content="HealthNote — медицинский браслет с QR‑кодом">
+<meta property="og:description" content="Браслет для тех, кто может внезапно потерять сознание. Диагноз, первая помощь и номер близкого открываются камерой телефона за секунды.">
+<meta property="og:url" content="https://arsenchulanov1-code.github.io/healthnote/">
+<meta property="og:image" content="https://arsenchulanov1-code.github.io/healthnote/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Браслет HealthNote с QR‑кодом на экране и надпись «Потеряли сознание? Браслет скажет за вас»">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:locale:alternate" content="kk_KZ">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="canonical" href="https://arsenchulanov1-code.github.io/healthnote/">
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -363,7 +377,30 @@ body.card-mode main, body.card-mode footer, body.card-mode nav.links{display:non
 .ecard-call .btn{justify-self:start;margin-top:8px}
 .ecard .form-note{padding:16px 24px 22px;border-top:2px solid var(--line)}
 .cv-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.qr-out{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.qr-out .btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* wallet card for printing: bank-card size with a dashed cut line */
+.print-sheet{display:none}
+@media print{
+  @page{size:A4;margin:14mm}
+  html,body{background:#fff!important;color:#000!important}
+  body > *:not(.print-sheet){display:none!important}
+  .print-sheet{display:block!important}
+  .pc-hint{font:12px/1.4 Arial,sans-serif;color:#444;margin:0 0 6mm}
+  .pc{width:85.6mm;height:53.98mm;box-sizing:border-box;border:.3mm dashed #888;border-radius:3.2mm;padding:3.5mm;display:grid;grid-template-columns:36mm 1fr;gap:3.5mm;align-items:center;font-family:Onest,Arial,sans-serif;color:#000;-webkit-print-color-adjust:exact;print-color-adjust:exact;break-inside:avoid}
+  .pc svg{width:36mm;height:36mm;display:block}
+  .pc-body{display:grid;gap:1.2mm;align-content:center;min-width:0}
+  .pc-k{display:flex;align-items:center;gap:1.4mm;font:800 7pt/1.1 Arial,sans-serif;text-transform:uppercase;color:#C62828;letter-spacing:.02em}
+  .pc-k i{width:3.4mm;height:3.4mm;background:#C62828;-webkit-mask:linear-gradient(#000 0 0) center/100% 34% no-repeat,linear-gradient(#000 0 0) center/34% 100% no-repeat;mask:linear-gradient(#000 0 0) center/100% 34% no-repeat,linear-gradient(#000 0 0) center/34% 100% no-repeat}
+  .pc-n{font:800 10.5pt/1.15 Arial,sans-serif;overflow-wrap:anywhere}
+  .pc-s{font:7pt/1.3 Arial,sans-serif;color:#222}
+  .pc-103{font:800 8pt/1.2 Arial,sans-serif}
+}
+.cv-edit-note{max-width:44ch;margin:-4px auto 0;text-align:center;font-size:14px;line-height:1.5;color:var(--muted)}
+.import-note{margin:0 0 18px;padding:12px 16px;border-radius:var(--r-md);border:1px solid color-mix(in srgb,var(--jade) 45%,var(--line));background:color-mix(in srgb,var(--jade) 10%,transparent);font-size:15px;line-height:1.45}
 /* first aid inside the scanned card */
+.ecard-allergies{box-shadow:inset 4px 0 0 var(--danger)}
+.ecard-allergies > span{color:var(--danger)!important}
 .cv-call-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
 .cv-call-btns .btn{margin:0}
 .ecard-help{display:grid;gap:14px;padding:22px 24px 24px;border-top:2px solid var(--line)}
@@ -1542,6 +1579,69 @@ footer .foot{container-type:inline-size}
 .motion-toggle i::after{content:"";position:absolute;left:2px;top:2px;width:14px;height:14px;border-radius:50%;background:#fff;transition:transform .3s}
 .motion-toggle[aria-pressed="true"] i{background:var(--jade)}
 .motion-toggle[aria-pressed="true"] i::after{transform:translateX(12px)}
+
+/* ===== emergency card: a white medical document on the dark page, readable in sunlight ===== */
+.ecard{--surface:#FFFFFF;--ink:#0E1726;--muted:#4B5565;--line:#DCE1E8;--danger:#C8102E;--jade:#1F4FD8;--jade-strong:#1F4FD8;--sun:#F5B400;
+  color:var(--ink);background:#fff;border:0;border-radius:20px;box-shadow:0 30px 80px -30px rgba(0,0,0,.65);color-scheme:light}
+.ecard .ecard-top{background:#fff;color:var(--ink);padding:22px 24px 20px;gap:6px;border-top:8px solid var(--danger)}
+.ecard .ecard-badge{background:none;color:var(--danger);padding:0;border-radius:0;font:700 15px/1.2 var(--f-body)}
+.ecard .ecard-badge svg{display:none}
+.ecard .ecard-badge::before{content:"";width:18px;height:18px;flex:none;background:var(--danger);
+  -webkit-mask:linear-gradient(#000 0 0) center/100% 36% no-repeat,linear-gradient(#000 0 0) center/36% 100% no-repeat;mask:linear-gradient(#000 0 0) center/100% 36% no-repeat,linear-gradient(#000 0 0) center/36% 100% no-repeat}
+.ecard .ecard-top h1{font:800 clamp(30px,8vw,42px)/1.08 var(--f-body);letter-spacing:-.025em;color:var(--ink);margin-top:4px}
+.ecard .cv-age{font-weight:500;font-size:17px;opacity:1;color:var(--muted)}
+.ecard .sample-flag{background:#FFF4D6;color:#6B4E00;font-weight:600}
+.ecard .ecard-103{background:var(--danger);color:#fff;border:0;padding:14px 24px;font-size:16px;font-weight:600;gap:16px}
+.ecard .ecard-103 b{color:#fff;font-size:40px}
+/* rows read like a printed form: label column, value column */
+.ecard .ecard-sec{grid-template-columns:minmax(0,.42fr) minmax(0,1fr);column-gap:18px;align-items:baseline;padding:16px 24px;border-top:1px solid var(--line)}
+.ecard .ecard-sec > span{font:500 14px/1.35 var(--f-body);color:var(--muted)}
+.ecard .ecard-sec p{font:600 19px/1.4 var(--f-body);color:var(--ink)}
+.ecard .ecard-blood{display:grid}
+.ecard .ecard-blood b{font:800 34px/1 var(--f-body);letter-spacing:-.02em;color:var(--ink);font-variant-numeric:tabular-nums}
+.ecard .ecard-alert,.ecard .ecard-alert.none{background:#F4F7FF;box-shadow:inset 4px 0 0 var(--jade)}
+.ecard .ecard-alert > span{color:var(--jade)}
+.ecard .ecard-alert p{font-size:20px}
+.ecard .ecard-allergies{background:#FFF1F2;box-shadow:inset 4px 0 0 var(--danger)}
+.ecard .ecard-call{align-items:center}
+.ecard .ecard-call .cv-call-btns{grid-column:1/-1}
+.ecard .cv-phone{font-size:22px}
+.ecard .btn-pink{background:var(--danger);border-color:var(--danger);color:#fff}
+.ecard .btn-ghost{background:#fff;border:1px solid #B8C1CE;color:var(--ink)}
+.ecard .btn-ghost:hover{border-color:var(--ink)}
+.ecard .btn-primary{background:var(--jade);border-color:var(--jade);color:#fff;box-shadow:none}
+.ecard .form-note{color:var(--muted);border-top:1px solid var(--line);font-size:14px}
+.ecard .ecard-help{border-top:8px solid #F1F3F6;background:#fff}
+.ecard .cvh-steps li::before{background:var(--ink)}
+.ecard .cvh-timer{border-color:var(--line);background:#F7F9FB}
+.ecard .tr-bg{stroke:#DCE1E8}
+.ecard .cvh-call{background:var(--danger)}
+@media (max-width:480px){
+  .ecard .ecard-sec{grid-template-columns:1fr;row-gap:2px;padding:14px 18px}
+  .ecard .ecard-top{padding:20px 18px 18px}
+  .ecard .ecard-103{padding:12px 18px}
+  .ecard .form-note{padding:14px 18px 18px}
+}
+
+/* signup: a live preview of the card fills the space next to the form */
+.auth-preview{display:none}
+@media (min-width:961px){
+  .account .wrap{display:grid;grid-template-columns:minmax(0,540px) minmax(0,1fr);column-gap:clamp(32px,5vw,80px);align-items:start}
+  .account .wrap > .block-head,.account .wrap > .workspace{grid-column:1/-1}
+  .account .wrap > .auth-preview:not([hidden]){display:grid;gap:14px;align-content:start;justify-items:center;padding-top:8px}
+}
+.ap-cap{font-size:15px;line-height:1.5;color:var(--muted);max-width:40ch;text-align:center}
+.ap-card{max-width:420px;animation:none;transform:rotate(1.5deg)}
+.ap-card .ecard-top{padding:18px 22px 16px}
+.ap-name{font:800 30px/1.1 var(--f-body);letter-spacing:-.02em;color:var(--ink);overflow-wrap:anywhere;min-height:1.1em}
+.ap-body{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center;padding:4px 22px 20px;border-top:1px solid var(--line)}
+.ap-rows{margin:0;display:grid}
+.ap-rows > div{padding:10px 0;border-bottom:1px solid var(--line)}
+.ap-rows > div:last-child{border-bottom:0}
+.ap-rows dt{font-size:13px;color:var(--muted)}
+.ap-rows dd{margin:2px 0 0;font-weight:600;font-size:16px;color:var(--ink)}
+.ap-qr{width:112px;line-height:0;--qr-bg:#fff;--qr-fg:#0E1726}
+.ap-qr svg{width:112px;height:112px}
 </style>
 <script>/* libraries start downloading in parallel without blocking the page; an emergency card link (#card-…) skips them, so the card opens at once */
 (function(){var L=["https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js","https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js","https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js","https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js","https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"];
@@ -1608,6 +1708,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
       <div class="ecard-sec ecard-blood"><span data-i="cardBlood"></span><b id="cvBlood"></b></div>
       <div class="ecard-sec" id="cvCondRow"><span data-i="mCond"></span><p id="cvCond"></p></div>
       <div class="ecard-sec ecard-alert" id="cvAllergyBox"><span data-i="mAllergy"></span><p id="cvAllergy"></p></div>
+      <div class="ecard-sec ecard-allergies" id="cvAllergiesRow"><span data-i="mAllergies"></span><p id="cvAllergies"></p></div>
       <div class="ecard-sec" id="cvMedsRow"><span data-i="mMeds"></span><p id="cvMeds"></p></div>
       <div class="ecard-sec ecard-call" id="cvPhoneBox"><span data-i="mPhone"></span><p class="cv-phone" id="cvPhone"></p><div class="cv-call-btns"><a class="btn btn-pink" id="cvCall" data-i="cvCall"></a><button class="btn btn-ghost" type="button" id="cvSms" data-i="cvSms"></button></div></div>
       <section class="ecard-help" id="cvHelp" aria-labelledby="cvHelpH">
@@ -1627,7 +1728,8 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
       <div class="ecard-top"><h1 data-i="cvErrH"></h1></div>
       <p class="form-note" data-i="cvErrP"></p>
     </article>
-    <div class="cv-actions"><a class="btn btn-primary" href="#account" data-i="cvCreate"></a><a class="btn btn-ghost" href="#about" data-i="cvAbout"></a></div>
+    <div class="cv-actions"><a class="btn btn-primary" href="#account" data-i="cvCreate" id="cvCreateBtn"></a><button class="btn btn-ghost" type="button" id="cvEdit" data-i="cvEdit" hidden></button><a class="btn btn-ghost" href="#about" data-i="cvAbout"></a></div>
+    <p class="cv-edit-note" id="cvEditNote" data-i="cvEditNote" hidden></p>
   </div>
 </section>
 
@@ -1684,7 +1786,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
   <section class="block paper" id="about">
     <div class="wrap">
       <div class="block-head reveal">
-        <span class="kicker" data-i="navAbout"></span>
+        
         <h2 class="split" data-i="aboutH"></h2>
         <p class="lead" data-i="aboutLead"></p>
       </div>
@@ -1700,11 +1802,11 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
 
   <section class="block explore" id="explore">
     <div class="wrap">
-      <div class="block-head"><span class="kicker" data-i="exK"></span><h2 class="split" data-i="exH"></h2></div>
+      <div class="block-head"><h2 class="split" data-i="exH"></h2></div>
       <div class="ex-grid">
-        <a class="ex tilt" href="#how"><span class="ex-n">01</span><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><rect x="34" y="8" width="104" height="156" rx="18" class="a-glass"/><rect x="34" y="8" width="104" height="156" rx="18" class="a-line"/><rect x="72" y="16" width="28" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="32" width="80" height="20" rx="6" class="a-acc-fill"/><circle cx="56" cy="42" r="3" fill="#fff"/><rect x="63" y="39.5" width="44" height="5" rx="2.5" fill="#fff" opacity=".85"/><rect x="46" y="62" width="58" height="7" rx="3.5" class="a-ink-fill"/><rect x="46" y="76" width="80" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="86" width="66" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="100" width="80" height="22" rx="6" class="a-soft-fill"/><rect x="52" y="106" width="44" height="4" rx="2" class="a-acc-fill"/><rect x="52" y="114" width="60" height="4" rx="2" class="a-dim-fill"/><rect x="46" y="132" width="36" height="7" rx="3.5" class="a-ink-fill"/><rect x="92" y="132" width="34" height="7" rx="3.5" class="a-ink-fill"/><path d="M150 86 H178" class="a-line a-dash"/><path d="M172 80 l7 6 -7 6" class="a-line"/><rect x="192" y="26" width="112" height="112" rx="16" class="a-paper"/><rect x="204.19" y="38.19" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="210.76" y="44.76" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="265.52" y="38.19" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="272.10" y="44.76" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="204.19" y="99.52" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="210.76" y="106.10" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="237.35" y="36.30" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="36.30" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="40.68" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="49.44" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="62.59" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="62.59" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="66.97" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="206.68" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="211.06" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="224.20" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="224.20" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="211.06" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="196" y="30" width="104" height="3" rx="1.5" class="a-scan"/><path d="M186 20 h-8 v14 M310 20 h8 v14 M186 144 h-8 v-14 M310 144 h8 v-14" class="a-acc-line"/></svg></span><h3 data-i="navHow"></h3><p data-i="ex1p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ex tilt" href="#bracelet"><span class="ex-n">02</span><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><defs><linearGradient id="exBand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" class="a-band1"/><stop offset=".5" class="a-band2"/><stop offset="1" class="a-band1"/></linearGradient></defs><ellipse cx="160" cy="98" rx="152" ry="62" class="a-orbit"/><path d="M22 88 a138 50 0 0 1 276 0" stroke="url(#exBand)" stroke-width="20" stroke-linecap="round" opacity=".5"/><path d="M22 88 a138 50 0 0 0 276 0" stroke="url(#exBand)" stroke-width="26" stroke-linecap="round"/><path d="M32 98 a128 42 0 0 0 256 0" class="a-hi" stroke-width="2"/><g transform="translate(166 116) rotate(-5)"><rect x="-62" y="-44" width="124" height="84" rx="18" class="a-case"/><rect x="-54" y="-36" width="108" height="68" rx="11" class="a-paper"/><rect x="-46.35" y="-28.35" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-41.41" y="-23.41" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-13.41" y="-28.35" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-8.47" y="-23.41" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-46.35" y="4.59" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-41.41" y="9.53" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-21.35" y="-26.41" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-23.11" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-19.82" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-16.52" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-9.94" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-6.64" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-47.70" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-41.11" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-14.76" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-1.58" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="-0.05" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="-0.05" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-14.76" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="9.83" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="9.83" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-1.58" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><circle cx="18" cy="-22" r="3.5" class="a-red"/><rect x="25" y="-25" width="20" height="6" rx="3" class="a-q-dim"/><rect x="16" y="-10" width="30" height="6" rx="3" class="a-q-dim"/><rect x="16" y="2" width="22" height="6" rx="3" class="a-q-dim"/><rect x="16" y="16" width="14" height="8" rx="2" class="a-q-dim"/><rect x="-70" y="-8" width="8" height="16" rx="4" class="a-acc-fill"/></g></svg></span><h3 data-i="navBracelet"></h3><p data-i="ex2p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
-        <a class="ex tilt" href="#aid"><span class="ex-n">03</span><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><g class="a-grid"><path d="M10 30 H220 M10 60 H220 M10 90 H220 M10 120 H220 M10 150 H220 M40 18 V160 M80 18 V160 M120 18 V160 M160 18 V160 M200 18 V160"/></g><path d="M10 100 H60 L70 100 L78 88 L86 100 H100 L108 112 L120 36 L134 150 L144 100 H164 L176 84 L190 100 H222" pathLength="1" class="a-ecg"/><circle cx="268" cy="88" r="42" class="a-ring-bg"/><circle cx="268" cy="88" r="42" pathLength="1" class="a-ring" transform="rotate(-90 268 88)"/><text x="268" y="96" text-anchor="middle" class="a-103">103</text><circle cx="268" cy="46" r="5" class="a-red"/></svg></span><h3 data-i="navAid"></h3><p data-i="ex3p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ex tilt" href="#how"><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><rect x="34" y="8" width="104" height="156" rx="18" class="a-glass"/><rect x="34" y="8" width="104" height="156" rx="18" class="a-line"/><rect x="72" y="16" width="28" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="32" width="80" height="20" rx="6" class="a-acc-fill"/><circle cx="56" cy="42" r="3" fill="#fff"/><rect x="63" y="39.5" width="44" height="5" rx="2.5" fill="#fff" opacity=".85"/><rect x="46" y="62" width="58" height="7" rx="3.5" class="a-ink-fill"/><rect x="46" y="76" width="80" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="86" width="66" height="5" rx="2.5" class="a-dim-fill"/><rect x="46" y="100" width="80" height="22" rx="6" class="a-soft-fill"/><rect x="52" y="106" width="44" height="4" rx="2" class="a-acc-fill"/><rect x="52" y="114" width="60" height="4" rx="2" class="a-dim-fill"/><rect x="46" y="132" width="36" height="7" rx="3.5" class="a-ink-fill"/><rect x="92" y="132" width="34" height="7" rx="3.5" class="a-ink-fill"/><path d="M150 86 H178" class="a-line a-dash"/><path d="M172 80 l7 6 -7 6" class="a-line"/><rect x="192" y="26" width="112" height="112" rx="16" class="a-paper"/><rect x="204.19" y="38.19" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="210.76" y="44.76" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="265.52" y="38.19" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="272.10" y="44.76" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="204.19" y="99.52" width="26.29" height="26.29" rx="3.94" class="q-f" fill="none" stroke-width="4.38"/><rect x="210.76" y="106.10" width="13.14" height="13.14" rx="2.19" class="q-d"/><rect x="237.35" y="36.30" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="36.30" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="40.68" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="45.06" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="49.44" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="53.82" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="58.20" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="62.59" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="62.59" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="66.97" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="206.68" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="211.06" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="224.20" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="71.35" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="224.20" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="75.73" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="211.06" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="80.11" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="84.49" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="202.30" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="215.44" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="219.82" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="228.59" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="232.97" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="250.49" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="88.87" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="93.25" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="97.63" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="102.01" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="106.40" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="110.78" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="254.87" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="115.16" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="237.35" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="272.40" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="281.16" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="285.54" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="119.54" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="241.73" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="246.11" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="259.25" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="263.63" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="268.01" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="276.78" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="289.92" y="123.92" width="3.78" height="3.78" rx="1.31" class="q-d"/><rect x="196" y="30" width="104" height="3" rx="1.5" class="a-scan"/><path d="M186 20 h-8 v14 M310 20 h8 v14 M186 144 h-8 v-14 M310 144 h8 v-14" class="a-acc-line"/></svg></span><h3 data-i="navHow"></h3><p data-i="ex1p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ex tilt" href="#bracelet"><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><defs><linearGradient id="exBand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" class="a-band1"/><stop offset=".5" class="a-band2"/><stop offset="1" class="a-band1"/></linearGradient></defs><ellipse cx="160" cy="98" rx="152" ry="62" class="a-orbit"/><path d="M22 88 a138 50 0 0 1 276 0" stroke="url(#exBand)" stroke-width="20" stroke-linecap="round" opacity=".5"/><path d="M22 88 a138 50 0 0 0 276 0" stroke="url(#exBand)" stroke-width="26" stroke-linecap="round"/><path d="M32 98 a128 42 0 0 0 256 0" class="a-hi" stroke-width="2"/><g transform="translate(166 116) rotate(-5)"><rect x="-62" y="-44" width="124" height="84" rx="18" class="a-case"/><rect x="-54" y="-36" width="108" height="68" rx="11" class="a-paper"/><rect x="-46.35" y="-28.35" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-41.41" y="-23.41" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-13.41" y="-28.35" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-8.47" y="-23.41" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-46.35" y="4.59" width="19.76" height="19.76" rx="2.96" class="q-f" fill="none" stroke-width="3.29"/><rect x="-41.41" y="9.53" width="9.88" height="9.88" rx="1.65" class="q-d"/><rect x="-21.35" y="-26.41" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-23.11" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-19.82" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-16.52" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-9.94" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-6.64" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-47.70" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-41.11" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-14.76" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-1.58" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="-3.35" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="-0.05" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="-0.05" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-14.76" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="3.24" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="6.54" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="9.83" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="5.01" y="9.83" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-4.88" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="13.12" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-21.35" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="16.42" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-18.05" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-1.58" y="19.71" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-11.46" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="-8.17" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><rect x="1.71" y="23.01" width="2.69" height="2.69" rx="0.99" class="q-d"/><circle cx="18" cy="-22" r="3.5" class="a-red"/><rect x="25" y="-25" width="20" height="6" rx="3" class="a-q-dim"/><rect x="16" y="-10" width="30" height="6" rx="3" class="a-q-dim"/><rect x="16" y="2" width="22" height="6" rx="3" class="a-q-dim"/><rect x="16" y="16" width="14" height="8" rx="2" class="a-q-dim"/><rect x="-70" y="-8" width="8" height="16" rx="4" class="a-acc-fill"/></g></svg></span><h3 data-i="navBracelet"></h3><p data-i="ex2p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+        <a class="ex tilt" href="#aid"><span class="ex-art" aria-hidden="true"><svg viewBox="0 0 320 170" fill="none"><g class="a-grid"><path d="M10 30 H220 M10 60 H220 M10 90 H220 M10 120 H220 M10 150 H220 M40 18 V160 M80 18 V160 M120 18 V160 M160 18 V160 M200 18 V160"/></g><path d="M10 100 H60 L70 100 L78 88 L86 100 H100 L108 112 L120 36 L134 150 L144 100 H164 L176 84 L190 100 H222" pathLength="1" class="a-ecg"/><circle cx="268" cy="88" r="42" class="a-ring-bg"/><circle cx="268" cy="88" r="42" pathLength="1" class="a-ring" transform="rotate(-90 268 88)"/><text x="268" y="96" text-anchor="middle" class="a-103">103</text><circle cx="268" cy="46" r="5" class="a-red"/></svg></span><h3 data-i="navAid"></h3><p data-i="ex3p"></p><span class="ex-go"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
       </div>
     </div>
   </section>
@@ -1715,7 +1817,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
   <div class="page" data-page="how" hidden>
   <section class="block paper" id="how">
     <div class="wrap">
-      <div class="block-head reveal"><span class="kicker" data-i="navHow"></span><h2 class="split" data-i="howH"></h2></div>
+      <div class="block-head reveal"><h2 class="split" data-i="howH"></h2></div>
       <ol class="steps" id="steps">
         <li class="step lit"><h3 data-i="s1h"></h3><p data-i="s1p"></p></li>
         <li class="step lit"><h3 data-i="s2h"></h3><p data-i="s2p"></p></li>
@@ -1726,7 +1828,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
 
   <section class="block demo" id="demo">
     <div class="wrap demo-grid">
-      <div class="block-head reveal"><span class="kicker" data-i="kDemo"></span><h2 class="split" data-i="demoH"></h2><p class="lead" data-i="demoLead"></p>
+      <div class="block-head reveal"><h2 class="split" data-i="demoH"></h2><p class="lead" data-i="demoLead"></p>
         <div class="presets" id="presets" role="group" data-i-aria="presetAria"></div>
       </div>
       <div class="stage" id="stage">
@@ -1751,7 +1853,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
   <div class="page" data-page="bracelet" hidden>
   <section class="block bracelet" id="bracelet">
     <div class="wrap">
-      <div class="block-head reveal"><span class="kicker" data-i="navBracelet"></span><h2 class="split" data-i="brH"></h2><p class="lead" data-i="brLead"></p></div>
+      <div class="block-head reveal"><h2 class="split" data-i="brH"></h2><p class="lead" data-i="brLead"></p></div>
       <div class="br-grid">
         <div class="br-stage" id="brStage">
           <canvas id="brCanvas" tabindex="0" role="img" data-i-aria="brAria"></canvas>
@@ -1804,7 +1906,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
 
   <section class="block" id="features">
     <div class="wrap">
-      <div class="block-head reveal"><span class="kicker" data-i="navFeatures"></span><h2 class="split" data-i="featH"></h2><p class="lead" data-i="featLead"></p></div>
+      <div class="block-head reveal"><h2 class="split" data-i="featH"></h2><p class="lead" data-i="featLead"></p></div>
       <div class="features">
         <div class="feature reveal">
           <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="M12 8v6M9 11h6M8 18h8"/></svg></div>
@@ -1834,7 +1936,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
   <div class="page" data-page="aid" hidden>
   <section class="block aid" id="aid">
     <div class="wrap">
-      <div class="block-head"><span class="kicker" data-i="navAid"></span><h2 class="split" data-i="aidH"></h2><p class="lead" data-i="aidLead"></p></div>
+      <div class="block-head"><h2 class="split" data-i="aidH"></h2><p class="lead" data-i="aidLead"></p></div>
       <div class="aid-grid">
         <div class="aid-main">
           <div class="presets" id="aidTabs" role="group" data-i-aria="presetAria"></div>
@@ -1865,7 +1967,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
   <div class="page" data-page="faq" hidden>
   <section class="block paper" id="faq">
     <div class="wrap">
-      <div class="block-head reveal"><span class="kicker" data-i="navFaq"></span><h2 class="split" data-i="faqH"></h2></div>
+      <div class="block-head reveal"><h2 class="split" data-i="faqH"></h2></div>
       <div class="faq">
         <details><summary><span data-i="q1"></span><span class="plus" aria-hidden="true"></span></summary><p data-i="a1"></p></details>
         <details><summary><span data-i="q5"></span><span class="plus" aria-hidden="true"></span></summary><p data-i="a5"></p></details>
@@ -1887,6 +1989,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
       </div>
 
       <div class="panel auth" id="authView">
+        <p class="import-note" id="importNote" role="status" hidden></p>
         <div class="tabs" role="tablist" id="tabs" data-i-aria="tabsAria">
           <span class="pill" aria-hidden="true"></span>
           <button type="button" role="tab" id="tabReg" aria-selected="true" aria-controls="regForm" data-i="tabReg"></button>
@@ -1936,6 +2039,21 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
         </form>
       </div>
 
+      <aside class="auth-preview" id="authPreview">
+        <p class="ap-cap" data-i="apCap"></p>
+        <div class="ecard ap-card" aria-hidden="true">
+          <div class="ecard-top"><span class="ecard-badge"><span data-i="cvBadge"></span></span><b class="ap-name" id="apName"></b></div>
+          <div class="ap-body">
+            <dl class="ap-rows">
+              <div><dt data-i="cardBlood"></dt><dd>A(II) Rh+</dd></div>
+              <div><dt data-i="mCond"></dt><dd data-i="p_epi_d"></dd></div>
+              <div><dt data-i="mAllergies"></dt><dd data-i="apAllergy"></dd></div>
+              <div><dt data-i="mPhone"></dt><dd>+7 701 123‑45‑67</dd></div>
+            </dl>
+            <div class="ap-qr" id="apQr"></div>
+          </div>
+        </div>
+      </aside>
       <div class="workspace" id="workspace" hidden>
         <div class="panel">
           <div class="ws-head">
@@ -1964,18 +2082,20 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
               </div>
               <div class="field"><label for="mPhone" data-i="mPhone"></label><input id="mPhone" type="tel" maxlength="40" data-i-ph="mPhonePh"></div>
             </div>
-            <div class="field"><label for="mAllergy" data-i="mAllergy"></label><textarea id="mAllergy" maxlength="80" data-i-ph="mAllergyPh"></textarea></div>
-            <div class="field"><label for="mMeds" data-i="mMeds"></label><textarea id="mMeds" maxlength="80"></textarea></div>
             <div class="field"><label for="mCond" data-i="mCond"></label><textarea id="mCond" maxlength="80"></textarea></div>
+            <div class="field"><label for="mAllergy" data-i="mAllergy"></label><textarea id="mAllergy" maxlength="80" data-i-ph="mAllergyPh"></textarea></div>
+            <div class="field"><label for="mAllergies" data-i="mAllergies"></label><textarea id="mAllergies" maxlength="80" data-i-ph="mAllergiesPh"></textarea></div>
+            <div class="field"><label for="mMeds" data-i="mMeds"></label><textarea id="mMeds" maxlength="80"></textarea></div>
             <fieldset>
               <legend data-i="mShow"></legend>
               <div class="checks" id="qrFields">
                 <label class="check"><input type="checkbox" value="name" checked> <span data-i="cName"></span></label>
                 <label class="check"><input type="checkbox" value="birth" checked> <span data-i="cBirth"></span></label>
                 <label class="check"><input type="checkbox" value="blood" checked> <span data-i="cBlood"></span></label>
-                <label class="check"><input type="checkbox" value="allergy" checked> <span data-i="cAllergy"></span></label>
-                <label class="check"><input type="checkbox" value="meds" checked> <span data-i="cMeds"></span></label>
                 <label class="check"><input type="checkbox" value="cond" checked> <span data-i="cCond"></span></label>
+                <label class="check"><input type="checkbox" value="allergy" checked> <span data-i="cAllergy"></span></label>
+                <label class="check"><input type="checkbox" value="allergies" checked> <span data-i="cAllergies"></span></label>
+                <label class="check"><input type="checkbox" value="meds" checked> <span data-i="cMeds"></span></label>
                 <label class="check"><input type="checkbox" value="phone" checked> <span data-i="cPhone"></span></label>
               </div>
             </fieldset>
@@ -2007,6 +2127,10 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
             <a class="btn btn-primary btn-sm" id="openCard" href="#" data-i="openCard"></a>
             <button class="btn btn-ghost btn-sm" type="button" id="copyBtn" data-i="qrCopy"></button>
           </div>
+          <div class="qr-out">
+            <button class="btn btn-ghost btn-sm" type="button" id="dlBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg><span data-i="qrDownload"></span></button>
+            <button class="btn btn-ghost btn-sm" type="button" id="printBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 9V4h10v5M7 17H5a1 1 0 0 1-1-1v-6a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v6a1 1 0 0 1-1 1h-2M7 14h10v6H7z"/></svg><span data-i="qrPrint"></span></button>
+          </div>
           <p class="form-note" data-i="qrHint"></p>
         </aside>
       </div>
@@ -2030,6 +2154,7 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
 </footer>
 <a class="to-top" href="#top" id="toTop" data-i-aria="toTopAria" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M6 11l6-6 6 6"/></svg></a>
 
+<div class="print-sheet" id="printSheet" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
@@ -2415,6 +2540,29 @@ en:{cvHelpH:"How to help right now", cvGen:"Loss of consciousness", cvTimerH:"Ti
 for(const l in T9) Object.assign(T[l],T9[l]);
 const T10={ru:{featPrev:"Показать предыдущую карточку",featNext:"Показать следующую карточку"},kk:{featPrev:"Алдыңғы карточканы көрсету",featNext:"Келесі карточканы көрсету"},en:{featPrev:"Show previous card",featNext:"Show next card"}};
 for(const l in T10) Object.assign(T[l],T10[l]);
+const T11={
+ru:{mAllergies:"Аллергии", mAllergiesPh:"Например: пенициллин, орехи. Если нет, оставьте пустым", cAllergies:"Аллергии"},
+kk:{mAllergies:"Аллергия", mAllergiesPh:"Мысалы: пенициллин, жаңғақ. Болмаса, бос қалдырыңыз", cAllergies:"Аллергия"},
+en:{mAllergies:"Allergies", mAllergiesPh:"For example: penicillin, nuts. Leave empty if none", cAllergies:"Allergies"}};
+for(const l in T11) Object.assign(T[l],T11[l]);
+const T12={
+ru:{cvEdit:"Изменить мою карточку", cvEditNote:"Это ваша карточка? Её можно открыть для правки на любом телефоне: все данные уже записаны в ссылке.",
+  importGuest:"Войдите или создайте аккаунт, и данные карточки «{name}» подставятся в медкарту.", importAsk:"Заменить медкарту в этом браузере данными карточки «{name}»?", importDone:"Медкарта загружена из ссылки"},
+kk:{cvEdit:"Карточкамды өзгерту", cvEditNote:"Бұл сіздің карточкаңыз ба? Оны кез келген телефонда түзетуге ашуға болады: барлық дерек сілтемеде жазылған.",
+  importGuest:"Кіріңіз немесе аккаунт ашыңыз, сонда «{name}» карточкасының деректері медкартаға қойылады.", importAsk:"Осы браузердегі медкартаны «{name}» карточкасының деректерімен ауыстыру керек пе?", importDone:"Медкарта сілтемеден жүктелді"},
+en:{cvEdit:"Edit my card", cvEditNote:"Is this your card? You can open it for editing on any phone: all the data is already in the link.",
+  importGuest:"Sign in or create an account and the details from “{name}” will be filled in.", importAsk:"Replace the card in this browser with the details from “{name}”?", importDone:"Card loaded from the link"}};
+for(const l in T12) Object.assign(T[l],T12[l]);
+const T13={
+ru:{qrDownload:"Скачать PNG", qrPrint:"Распечатать карточку", qrSaved:"Картинка с QR‑кодом сохранена", printHint:"Вырежьте карточку по пунктиру и положите в кошелёк рядом с документами.", printScan:"Наведите камеру телефона на код: откроется медкарта и что делать.", printCall:"Скорая помощь: 103"},
+kk:{qrDownload:"PNG жүктеу", qrPrint:"Карточканы басып шығару", qrSaved:"QR‑код суреті сақталды", printHint:"Карточканы пунктир бойымен қиып, әмияныңызға құжаттардың қасына салыңыз.", printScan:"Телефон камерасын кодқа бағыттаңыз: медкарта және не істеу керегі ашылады.", printCall:"Жедел жәрдем: 103"},
+en:{qrDownload:"Download PNG", qrPrint:"Print wallet card", qrSaved:"QR code image saved", printHint:"Cut the card out along the dashed line and keep it in your wallet next to your ID.", printScan:"Point a phone camera at the code to open the medical card and first aid steps.", printCall:"Ambulance: 103"}};
+for(const l in T13) Object.assign(T[l],T13[l]);
+const T14={
+ru:{apCap:"Так вашу карточку увидит человек, который отсканирует QR‑код на браслете.", apAllergy:"Пенициллин"},
+kk:{apCap:"Білезіктегі QR‑кодты сканерлеген адам карточкаңызды осылай көреді.", apAllergy:"Пенициллин"},
+en:{apCap:"This is how your card looks to someone who scans the QR code on the bracelet.", apAllergy:"Penicillin"}};
+for(const l in T14) Object.assign(T[l],T14[l]);
 
 /* ---------- card link codec ---------- */
 // Адрес, на который ведёт QR-код. После размещения сайта впишите сюда его адрес, например "https://healthnote.kz/".
@@ -2443,7 +2591,7 @@ async function decodeCard(code){
   if(!raw) throw new Error('bad');
   return new TextDecoder().decode(raw).split('\u001f');
 }
-/* fields: [version, lang, name, birth, blood, allergy, meds, cond, phone, sample] */
+/* fields: [version, lang, name, birth, blood, aid (stored as "allergy"), meds, cond, phone, sample, allergies] */
 
 const $ = id => document.getElementById(id);
 const root = document.documentElement;
@@ -2516,7 +2664,7 @@ $('presets').addEventListener('click',e=>{
 async function drawHeroQr(anim){
   fillPreset(anim);
   const code=await encodeCard(['1',lang,t('sampleName'),'1992-03-14',sampleBlood,t('p_'+preset+'_a'),t('p_'+preset+'_m'),t('p_'+preset+'_d'),'+7 701 123-45-67','1']);
-  heroUrl=baseUrl()+'#card-'+code; updatePlate();
+  heroUrl=baseUrl()+'#card-'+code; updatePlate(); if(!(session&&users[session])) apSync();
   const r=qrSvg(heroUrl,100), box=$('heroQr');
   if(!r){ box.hidden=true; return; }
   box.innerHTML=r.svg;
@@ -2639,14 +2787,16 @@ $('loginForm').addEventListener('submit',async e=>{
 $('logoutBtn').onclick=()=>{ session=null; store.del('hn_session'); render(true); toast(t('tLogout')); };
 
 /* ---------- medical card ---------- */
-const F={name:'mName',birth:'mBirth',blood:'mBlood',allergy:'mAllergy',meds:'mMeds',cond:'mCond',phone:'mPhone'};
+const F={name:'mName',birth:'mBirth',blood:'mBlood',allergy:'mAllergy',allergies:'mAllergies',meds:'mMeds',cond:'mCond',phone:'mPhone'};
 const QL={birth:'qBirth',blood:'qBlood',allergy:'qAllergy',meds:'qMeds',cond:'qCond',phone:'qPhone'};
 function readCard(){ const c={}; for(const k in F) c[k]=$(F[k]).value.trim(); c.show=[...document.querySelectorAll('#qrFields input:checked')].map(i=>i.value); c.frame=frame; return c; }
-function fillCard(c){ for(const k in F) $(F[k]).value=c[k]||''; const show=c.show||Object.keys(F); document.querySelectorAll('#qrFields input').forEach(i=>i.checked=show.includes(i.value)); setFrame(c.frame||'var(--jade)'); }
+function fillCard(c){ for(const k in F) $(F[k]).value=c[k]||''; const show=c.show ? (c.show.includes('allergies')||c.allergies!==undefined ? c.show : c.show.concat('allergies')) : Object.keys(F); document.querySelectorAll('#qrFields input').forEach(i=>i.checked=show.includes(i.value)); setFrame(c.frame||'var(--jade)'); }
 const fmtDate=v=>{ if(!v) return ''; const [y,m,d]=v.split('-'); return `${d}.${m}.${y}`; };
 async function cardCode(c){
   const v=k=>c.show.includes(k)&&c[k] ? c[k].replace(/\s+/g,' ') : '';
-  return encodeCard(['1',lang,v('name'),v('birth'),v('blood'),v('allergy'),v('meds'),v('cond'),v('phone'),'']);
+  const f=['1',lang,v('name'),v('birth'),v('blood'),v('allergy'),v('meds'),v('cond'),v('phone'),'',v('allergies')];  // allergies were added last so older links still decode
+  if(!f[10]) f.pop();
+  return encodeCard(f);
 }
 async function cardUrl(c){ return baseUrl()+'#card-'+await cardCode(c); }
 let frame='var(--jade)';
@@ -2659,7 +2809,7 @@ async function drawQr(animate){
   const text=baseUrl()+'#card-'+code, px=+$('qrSize').value;
   $('openCard').href='#card-'+code;
   $('qrSizeVal').textContent=px+' px';
-  const filled=Object.keys(F).filter(k=>c[k]).length, pct=Math.round(filled/7*100);
+  const filled=Object.keys(F).filter(k=>c[k]).length, pct=Math.round(filled/Object.keys(F).length*100);
   $('completeVal').textContent=pct+'%'; $('completeBar').style.setProperty('--w',pct+'%');
   const r=qrSvg(text,px), fr=$('qrFrame');
   if(!r){ fr.innerHTML=''; $('qrMeta').textContent=t('qrFail'); return; }
@@ -2685,9 +2835,39 @@ $('copyBtn').addEventListener('click',()=>{
   });
 });
 
+/* ---------- QR out: PNG download and a printable wallet card ---------- */
+function qrMatrix(text){ if(typeof qrcode!=='function') return null; qrcode.stringToBytes=s=>Array.from(new TextEncoder().encode(s)); const q=qrcode(0,'L'); q.addData(text,'Byte'); q.make(); return q; }
+$('dlBtn').addEventListener('click',()=>{
+  const q=lastText && qrMatrix(lastText); if(!q){ toast(t('qrFail')); return; }
+  const c=readCard(), n=q.getModuleCount(), m=Math.floor(900/(n+8)), pad=m*4, W=n*m+pad*2, capH=Math.round(W*.2);
+  const cv=document.createElement('canvas'); cv.width=W; cv.height=W+capH; const g=cv.getContext('2d');
+  g.fillStyle='#fff'; g.fillRect(0,0,cv.width,cv.height); g.fillStyle='#000';
+  for(let y=0;y<n;y++) for(let x=0;x<n;x++) if(q.isDark(y,x)) g.fillRect(pad+x*m,pad+y*m,m,m);
+  g.textAlign='center'; g.fillStyle='#C62828'; g.font=`800 ${Math.round(capH*.26)}px Onest, Arial, sans-serif`;
+  g.fillText(t('cvBadge').toUpperCase(),W/2,W+capH*.22);
+  g.fillStyle='#000'; g.font=`700 ${Math.round(capH*.24)}px Onest, Arial, sans-serif`;
+  if(c.show.includes('name') && c.name) g.fillText(c.name,W/2,W+capH*.56,W-pad*2);
+  g.fillStyle='#444'; g.font=`500 ${Math.round(capH*.15)}px Onest, Arial, sans-serif`; g.fillText(t('printScan'),W/2,W+capH*.84,W-pad);
+  cv.toBlob(b=>{ if(!b){ toast(t('qrFail')); return; } const a=document.createElement('a'); a.href=URL.createObjectURL(b); a.download='healthnote-qr.png'; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),4000); toast(t('qrSaved')); },'image/png');
+});
+$('printBtn').addEventListener('click',()=>{
+  const r=lastText && qrSvg(lastText,136); if(!r){ toast(t('qrFail')); return; }
+  const c=readCard(), esc=v=>String(v).replace(/[&<>"]/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[ch]));
+  const svg=r.svg.replace('fill="var(--qr-bg)"','fill="#fff"').replace('fill="var(--qr-fg)"','fill="#000"');
+  const name=c.show.includes('name')&&c.name ? `<div class="pc-n">${esc(c.name)}</div>` : '';
+  $('printSheet').innerHTML=`<p class="pc-hint">${esc(t('printHint'))}</p><div class="pc">${svg}<div class="pc-body"><div class="pc-k"><i></i>${esc(t('cvBadge'))}</div>${name}<div class="pc-s">${esc(t('printScan'))}</div><div class="pc-103">${esc(t('printCall'))}</div></div></div>`;
+  window.print();
+});
+
+function apSync(){
+  const v=$('regName').value.trim(); $('apName').textContent = v || t('sampleName');
+  const q=$('apQr'); if(heroUrl && q.dataset.u!==heroUrl){ const r=qrSvg(heroUrl,112); if(r){ q.innerHTML=r.svg; q.dataset.u=heroUrl; } }
+}
+$('regName').addEventListener('input',apSync);
+
 function render(fresh){
   const u=session&&users[session]; if(fresh){ brTextDirty=false; updatePlate(); }
-  $('authView').hidden=!!u; $('workspace').hidden=!u;
+  $('authView').hidden=!!u; $('workspace').hidden=!u; $('authPreview').hidden=!!u; if(!u) apSync();
   $('headerCta').textContent=t(u?'ctaMine':'ctaCreate');
   $('accountTitle').textContent=t(u?'accUserH':'accGuestH');
   $('accountLead').textContent=t(u?'accUserP':'accGuestP');
@@ -2696,6 +2876,7 @@ function render(fresh){
     if(fresh){ fillCard(u.card||{name:u.name}); lastText=''; }
     drawQr(fresh);
   }
+  if(typeof applyImport==='function') applyImport();
 }
 /* ---------- 3D bracelet ---------- */
 let heroUrl='', brTextDirty=false, plateDirty=true;
@@ -2956,7 +3137,10 @@ if('IntersectionObserver' in window){ const bo=new IntersectionObserver(es=>{ if
       cx=visR.x+visR.w/2; cy=visR.y+visR.h*.5; posA=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH];
       sA=Math.min(visR.w/(3.25*pxPerUnit), visR.h/(3.6*pxPerUnit)); }
     else if(!bigQ.matches){ posA=posB; sA=sB; }
-    else { cx=visR.x+visR.w*.54; cy=visR.y+visR.h*.72; posA=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH]; sA=Math.min(visR.w/(3.5*pxPerUnit), visR.h/(4.35*pxPerUnit)); }
+    else { // keep the assembled bracelet below the headline so no word is hidden behind it
+      const tr=hero.querySelector('.hero-title').getBoundingClientRect(), top=Math.max(visR.y, tr.bottom-hr.top+8), hh=visR.y+visR.h-top;
+      sA=Math.min(visR.w/(3.5*pxPerUnit), visR.h/(4.35*pxPerUnit), hh/(2.9*pxPerUnit));
+      cx=visR.x+visR.w*.54; cy=Math.max(visR.y+visR.h*.72, top+sA*pxPerUnit*1.45); posA=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH]; }
     s=sA; rig.position.set(posA[0],posA[1],0);
     rig.scale.setScalar(s);
     const ob=$('heroOrbit'), od=s*pxPerUnit*4.3; ob.style.width=ob.style.height=od.toFixed(0)+'px'; ob.style.left=(cx-od/2).toFixed(0)+'px'; ob.style.top=(cy-od/2).toFixed(0)+'px';
@@ -3282,7 +3466,7 @@ if(fine && !reduced){
 let viewing=null;
 function fillCardView(){
   if(!viewing) return;
-  const [ver,lng,name,birth,blood,allergy,meds,cond,phone,sample]=viewing;
+  const [ver,lng,name,birth,blood,allergy,meds,cond,phone,sample,allergies]=viewing;
   $('cvSample').hidden = sample!=='1';
   $('cvName').textContent = name || t('cvNoName');
   if(birth){ const b=new Date(birth+'T00:00:00'), n=new Date(); let age=n.getFullYear()-b.getFullYear(); if(n<new Date(n.getFullYear(),b.getMonth(),b.getDate())) age--;
@@ -3290,11 +3474,13 @@ function fillCardView(){
   $('cvBlood').textContent = blood || t('cvNone');
   $('cvAllergy').textContent = allergy || t('cvNone'); $('cvAllergyBox').classList.toggle('none',!allergy);
   $('cvMeds').textContent=meds; $('cvMedsRow').hidden=!meds;
+  $('cvAllergies').textContent=allergies; $('cvAllergiesRow').hidden=!allergies;
   $('cvCond').textContent=cond; $('cvCondRow').hidden=!cond;
   $('cvPhone').textContent = phone || t('cvNone');
   const num=(phone.match(/\+?\d[\d\s()‑-]{5,}\d/)||[''])[0].replace(/[^\d+]/g,'');
   $('cvCall').hidden=!num; if(num) $('cvCall').href='tel:'+num;
   $('cvSms').hidden=!num;
+  $('cvEdit').hidden = sample==='1'; $('cvEditNote').hidden = sample==='1';
   fillHelp();
 }
 /* first aid inside the scanned card: pick instructions from the diagnosis, a timer, and an SMS with the location */
@@ -3348,6 +3534,27 @@ $('cvSms').addEventListener('click',()=>{
   btn.disabled=true; btn.textContent=t('cvLocating');
   navigator.geolocation.getCurrentPosition(send,()=>{ toast(t('cvGeoFail')); send(null); },{enableHighAccuracy:true,timeout:8000,maximumAge:60000});
 });
+/* restore: the card link holds all the data, so its owner can load it into the editor on any device */
+const IMPORT_KEY='hn_import';
+function getImport(){ try{ return JSON.parse(sessionStorage.getItem(IMPORT_KEY)); }catch(e){ return null; } }
+function setImport(v){ try{ v ? sessionStorage.setItem(IMPORT_KEY,JSON.stringify(v)) : sessionStorage.removeItem(IMPORT_KEY); }catch(e){} }
+$('cvEdit').addEventListener('click',()=>{
+  if(!viewing) return;
+  const [,,name,birth,blood,allergy,meds,cond,phone,,allergies]=viewing;
+  const c={name,birth,blood,allergy,meds,cond,phone,allergies:allergies||''};
+  c.show=Object.keys(F);
+  setImport(c); location.hash='account';
+});
+function applyImport(){
+  const c=getImport(); if(!c){ $('importNote').hidden=true; return; }
+  const u=session&&users[session];
+  if(!u){ $('importNote').textContent=t('importGuest').replace('{name}',c.name||t('cvNoName')); $('importNote').hidden=false; return; }
+  $('importNote').hidden=true;
+  const cur=u.card||{}, has=Object.keys(F).some(k=>k!=='name' && cur[k]);
+  if(has && !confirm(t('importAsk').replace('{name}',c.name||t('cvNoName')))){ setImport(null); return; }
+  c.frame=cur.frame; u.card=c; store.set('hn_users',users); setImport(null);
+  fillCard(c); lastText=''; drawQr(true); toast(t('importDone'));
+}
 async function route(){
   const m=/^#card-([0-9a-z]+)$/.exec(location.hash);
   if(!m){
@@ -3356,12 +3563,13 @@ async function route(){
     if(was && !window.__libsLoaded){ location.reload(); return; }  // the card opened without the heavy libraries: load the full site
     const id=(location.hash||'').slice(1); if(was) curPage=null;
     showPage(PAGE_OF[id]||'home', id);
+    if((PAGE_OF[id]||'home')==='account') applyImport();
     return;
   }
   document.body.classList.add('card-mode'); $('cardView').hidden=false; jump(0,false);
   try{
     viewing=await decodeCard(m[1]);
-    while(viewing.length<10) viewing.push('');
+    while(viewing.length<11) viewing.push('');
     $('ecard').hidden=false; $('cvError').hidden=true;
     let userLang=null; try{ userLang=localStorage.getItem('hn_lang'); }catch(e){}
     if(!userLang && T[viewing[1]] && viewing[1]!==lang){ lang=viewing[1]; applyLang(false); }
