@@ -363,6 +363,45 @@ body.card-mode main, body.card-mode footer, body.card-mode nav.links{display:non
 .ecard-call .btn{justify-self:start;margin-top:8px}
 .ecard .form-note{padding:16px 24px 22px;border-top:2px solid var(--line)}
 .cv-actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+/* first aid inside the scanned card */
+.cv-call-btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:8px}
+.cv-call-btns .btn{margin:0}
+.ecard-help{display:grid;gap:14px;padding:22px 24px 24px;border-top:2px solid var(--line)}
+.cvh-head{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px}
+.ecard-help .cvh-head h2{font:700 20px/1.25 var(--f-body);letter-spacing:-.01em;text-transform:none;margin:0}
+.cvh-for{font-size:14px;font-weight:600;color:var(--muted)}
+.cvh-steps{list-style:none;margin:0;padding:0;display:grid;gap:8px;counter-reset:c}
+.cvh-steps li{counter-increment:c;display:grid;grid-template-columns:32px 1fr;gap:12px;align-items:start;font-weight:600;font-size:16px;line-height:1.45}
+.cvh-steps li::before{content:counter(c);display:grid;place-items:center;width:32px;height:32px;border-radius:50%;background:var(--jade);color:#fff;font-weight:700;font-size:15px}
+.cvh-dont{display:grid;gap:4px;padding:12px 16px;border-radius:var(--r-md);border:1px solid color-mix(in srgb,var(--danger) 45%,var(--line));background:color-mix(in srgb,var(--danger) 7%,var(--surface))}
+.cvh-dont span{font-size:13px;font-weight:700;color:var(--danger)}
+.cvh-dont p{font-weight:600;font-size:15px;line-height:1.45}
+.cvh-timer{display:grid;grid-template-columns:112px 1fr;gap:16px;align-items:center;padding:14px 16px;border-radius:var(--r-md);border:1px solid var(--line)}
+.cvh-ring{position:relative;width:112px;aspect-ratio:1}
+.cvh-ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.cvh-ring circle{fill:none;stroke-width:6}
+.cvh-ring b{position:absolute;inset:0;display:grid;place-items:center;font:800 30px/1 var(--f-display);font-variant-numeric:tabular-nums}
+.cvh-tbody{display:grid;gap:6px;min-width:0}
+.cvh-tbody h3{font:700 15px/1.3 var(--f-body);margin:0}
+.cvh-tbody p{font-size:14px;line-height:1.4;color:var(--muted);min-height:1.4em}
+.cvh-tbody .timer-btns{justify-content:flex-start;flex-wrap:nowrap;gap:8px}
+.cvh-tbody .timer-btns .btn{min-height:44px;padding:0 16px;flex:0 1 auto}
+.cvh-timer.alert{border-color:var(--danger)}
+.cvh-timer.alert .tr-fg{stroke:var(--danger)}
+.cvh-timer.alert p{color:var(--danger);font-weight:700}
+.cvh-timer.alert .cvh-ring b{color:var(--danger)}
+.cvh-call{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:12px 16px;border-radius:var(--r-md);background:var(--danger);color:#fff;text-decoration:none;font-weight:600;font-size:15px;line-height:1.4}
+.cvh-call b{font:900 40px/.9 var(--f-display)}
+@media (max-width:480px){
+  .ecard-help{padding:20px 18px 22px}
+  .cvh-timer{grid-template-columns:88px 1fr;gap:4px 14px}
+  .cvh-ring{width:88px;grid-row:1/3}.cvh-ring b{font-size:24px}
+  .cvh-tbody{display:contents}
+  .cvh-tbody h3{grid-column:2;align-self:end}
+  .cvh-tbody p{grid-column:2;align-self:start}
+  .cvh-tbody .timer-btns{grid-column:1/-1;margin-top:10px}
+  .cvh-tbody .timer-btns .btn{flex:1 1 0}
+}
 .sample-flag{font-size:13px;font-weight:800;background:var(--ink);color:var(--bg);padding:3px 10px;border-radius:999px;width:max-content}
 
 /* ---------- refresh layer: calmer, product-grade look ---------- */
@@ -1222,7 +1261,7 @@ nav.links a[aria-current],nav.links a:hover{color:var(--ink)}
 .hero-text{gap:16px}
 .hud{font:500 13px/1 var(--f-body);animation:none;opacity:clamp(0,calc(var(--e,0)*5),1)}
 .hud b{font:600 13px/1 var(--f-body)}
-.pchip{min-height:40px;padding:0 16px;font:500 14px var(--f-body);background:rgba(12,17,32,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pchip{min-height:44px;padding:0 16px;font:500 14px var(--f-body);background:rgba(12,17,32,.5);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
 .xlabel{border-radius:18px;padding:14px 16px;-webkit-backdrop-filter:blur(16px) saturate(1.4);backdrop-filter:blur(16px) saturate(1.4)}
 .xlabel b{font:600 15px/1.2 var(--f-body)}
 .hero-visual{touch-action:pan-y}
@@ -1239,6 +1278,13 @@ nav.links a[aria-current],nav.links a:hover{color:var(--ink)}
   .hero{padding-top:8px}
   .hero .wrap{gap:18px}
   .hero-title > span:first-child .ch{-webkit-text-stroke-width:2px}
+}
+/* phones: the bracelet comes right after the headline, so it is on the first screen */
+@media (max-width:880px) and (orientation:portrait){
+  .hero{padding-bottom:64px}
+  .hero h1.hero-title{order:0}
+  .hero-visual{order:1;min-height:clamp(380px,104vw,520px);margin-top:-6px}
+  .hero-text{order:2}
 }
 @media (orientation:landscape) and (max-height:560px){
   .hero h1.hero-title{font-size:clamp(40px,13vh,64px);grid-column:1}
@@ -1329,7 +1375,7 @@ nav.links a[aria-current],nav.links a:hover{color:var(--ink)}
 .specs dt{font-weight:600}
 .swatch{width:36px;height:36px}
 
-/* features: big glass cards; on desktop they travel sideways while the section is pinned */
+/* features: big glass cards in a grid; on phones they swipe */
 .features{gap:clamp(12px,1.4vw,20px)}
 .feature{padding:clamp(26px,2.8vw,40px);border-radius:var(--r-lg);border-color:var(--glass-line);grid-template-columns:1fr;align-content:space-between;gap:clamp(40px,6vw,96px);
   background:linear-gradient(165deg,rgba(220,230,255,.08),rgba(220,230,255,.02) 60%);box-shadow:inset 0 1px 0 rgba(255,255,255,.07)}
@@ -1337,12 +1383,22 @@ nav.links a[aria-current],nav.links a:hover{color:var(--ink)}
 .feature p{font-size:clamp(16px,1.25vw,18px);margin-top:12px;max-width:38ch}
 .ico{width:104px;height:104px;border-radius:50%;background:rgba(47,107,255,.14);color:var(--jade-strong);box-shadow:inset 0 0 0 1px rgba(134,168,255,.18)}
 .ico svg{width:46px;height:46px;stroke-width:1.5}
-.features.hz{display:flex;flex-wrap:nowrap;width:max-content;will-change:transform}
-.features.hz .feature{width:min(500px,38vw);min-height:min(50vh,430px)}
-#features.hz-on{padding-block:88px 24px;min-height:100vh;display:grid;align-content:center;overflow:hidden}
-#features.hz-on .block-head{margin-bottom:clamp(24px,3vw,40px)}
-#features.hz-on .block-head h2{font-size:var(--t-sec)}
-#features.hz-on .lead{display:none}
+.features{grid-template-columns:repeat(2,minmax(0,1fr))}
+.feature{min-height:clamp(280px,24vw,340px)}
+.feat-nav{display:none}
+/* phones: cards swipe sideways and snap; arrows and a counter show there is more */
+@media (max-width:760px){
+  .features{display:flex;grid-template-columns:none;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding-inline:16px;overscroll-behavior-x:contain;
+    margin-inline:-16px;padding:4px 16px 8px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .features::-webkit-scrollbar{display:none}
+  .features .feature{flex:0 0 84%;scroll-snap-align:start;min-height:320px}
+  .feat-nav{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:16px}
+  .feat-count{font:600 15px/1 var(--f-body);color:var(--muted);font-variant-numeric:tabular-nums}
+  .feat-btns{display:flex;gap:8px}
+  .feat-btns .icon-btn{width:48px;height:48px;border-radius:50%;border-width:1px}
+  .feat-btns .icon-btn:hover{transform:none}
+  .feat-btns .icon-btn:disabled{opacity:.35;cursor:default}
+}
 
 /* first aid: ECG paper under the page, red only where it means "emergency" */
 .aid{position:relative}
@@ -1487,12 +1543,17 @@ footer .foot{container-type:inline-size}
 .motion-toggle[aria-pressed="true"] i{background:var(--jade)}
 .motion-toggle[aria-pressed="true"] i::after{transform:translateX(12px)}
 </style>
+<script>/* libraries start downloading in parallel without blocking the page; an emergency card link (#card-…) skips them, so the card opens at once */
+(function(){var L=["https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js","https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js","https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js","https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js","https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"];
+if(/^#card-/.test(location.hash)){window.__libs=Promise.resolve();return;}
+window.__libsLoaded=true;var h=document.head;
+window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s=document.createElement("script");s.src=u;s.async=false;s.onload=s.onerror=function(){r();};h.appendChild(s);});}));})();</script>
 </head>
 <body>
 <canvas id="bgfx" aria-hidden="true"></canvas>
 <div class="preloader" id="preloader" hidden aria-hidden="true"><div class="pl-bg"></div><div class="pl-panel"><div class="pl-top"><span class="logo"><svg class="mark" width="28" height="28" viewBox="0 0 40 40" aria-hidden="true"><circle class="mk-ring" cx="20" cy="21" r="14" fill="none" stroke="var(--jade)" stroke-width="4" stroke-linecap="round" stroke-dasharray="66 22"/><rect class="mk-disp" x="25.7" y="7.1" width="11" height="11" rx="3" fill="#EEF1F6" transform="rotate(-37 31.2 12.6)"/><path class="mk-pulse" pathLength="1" d="M10.5 21h4.5l2.6-6.5 4.4 13 2.6-6.5h4.9" fill="none" stroke="#EEF1F6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="name"><b>Health</b>Note</span></span><span class="pl-tag">Emergency&nbsp;ID&nbsp;·&nbsp;2026</span></div><div class="pl-mid"><svg class="pl-ecg" viewBox="0 0 1000 120" preserveAspectRatio="none"><path class="g" d="M0 60 H300 L320 60 L335 48 L350 60 L380 60 L395 72 L415 8 L438 110 L455 60 L520 60 L545 40 L575 60 H1000"/><path class="f" pathLength="1" d="M0 60 H300 L320 60 L335 48 L350 60 L380 60 L395 72 L415 8 L438 110 L455 60 L520 60 L545 40 L575 60 H1000"/></svg><div class="pl-count"><span id="plNum">000</span><small>%</small></div><div class="pl-bar"><i></i></div></div><div class="pl-foot"><span id="plMsg"></span><span class="skip-hint" id="plSkip"></span></div></div></div>
 <script>/* show the preloader before the heavy scripts arrive; never for an emergency card link */
-(function(){var d=document.documentElement,p=document.getElementById("preloader");var calm=false;try{calm=localStorage.getItem("hn_motion")==='"off"';}catch(e){}if(calm)d.classList.add("calm");if(calm||/^#card-/.test(location.hash)||!p) return;d.classList.add("preloading");p.hidden=false;setTimeout(function(){if(d.classList.contains("preloading")){d.classList.remove("preloading");d.classList.add("intro");p.hidden=true;}},9000);})();</script>
+(function(){var d=document.documentElement,p=document.getElementById("preloader");var calm=false;try{var m=localStorage.getItem("hn_motion");calm=m==='"off"'||(m===null&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){calm=matchMedia("(prefers-reduced-motion: reduce)").matches;}if(calm)d.classList.add("calm");if(calm||/^#card-/.test(location.hash)||!p) return;d.classList.add("preloading");p.hidden=false;setTimeout(function(){if(d.classList.contains("preloading")){d.classList.remove("preloading");d.classList.add("intro");p.hidden=true;}},9000);})();</script>
 <div class="curtain" id="curtain" hidden aria-hidden="true"><div class="cur-cols"><i></i><i></i><i></i><i></i><i></i></div><div class="cur-mid"><svg class="mark" width="44" height="44" viewBox="0 0 40 40" aria-hidden="true"><circle class="mk-ring" cx="20" cy="21" r="14" fill="none" stroke="var(--jade)" stroke-width="4" stroke-linecap="round" stroke-dasharray="66 22"/><rect class="mk-disp" x="25.7" y="7.1" width="11" height="11" rx="3" fill="#EEF1F6" transform="rotate(-37 31.2 12.6)"/><path class="mk-pulse" pathLength="1" d="M10.5 21h4.5l2.6-6.5 4.4 13 2.6-6.5h4.9" fill="none" stroke="#EEF1F6" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="cur-k" id="curK"></span><b class="cur-t" id="curTitle"></b></div></div>
 
 <a class="skip" href="#stats" data-i="skipLink"></a>
@@ -1548,7 +1609,18 @@ footer .foot{container-type:inline-size}
       <div class="ecard-sec" id="cvCondRow"><span data-i="mCond"></span><p id="cvCond"></p></div>
       <div class="ecard-sec ecard-alert" id="cvAllergyBox"><span data-i="mAllergy"></span><p id="cvAllergy"></p></div>
       <div class="ecard-sec" id="cvMedsRow"><span data-i="mMeds"></span><p id="cvMeds"></p></div>
-      <div class="ecard-sec ecard-call" id="cvPhoneBox"><span data-i="mPhone"></span><p class="cv-phone" id="cvPhone"></p><a class="btn btn-pink" id="cvCall" data-i="cvCall"></a></div>
+      <div class="ecard-sec ecard-call" id="cvPhoneBox"><span data-i="mPhone"></span><p class="cv-phone" id="cvPhone"></p><div class="cv-call-btns"><a class="btn btn-pink" id="cvCall" data-i="cvCall"></a><button class="btn btn-ghost" type="button" id="cvSms" data-i="cvSms"></button></div></div>
+      <section class="ecard-help" id="cvHelp" aria-labelledby="cvHelpH">
+        <div class="cvh-head"><h2 id="cvHelpH" data-i="cvHelpH"></h2><span class="cvh-for" id="cvHelpFor"></span></div>
+        <ol class="cvh-steps" id="cvSteps"></ol>
+        <div class="cvh-dont"><span data-i="dontLbl"></span><p id="cvDont"></p></div>
+        <div class="cvh-timer" id="cvTimer">
+          <div class="cvh-ring"><svg viewBox="0 0 120 120" aria-hidden="true"><circle class="tr-bg" cx="60" cy="60" r="52"/><circle class="tr-fg" id="cvTimerArc" cx="60" cy="60" r="52" pathLength="1"/></svg><b id="cvTimerVal" role="timer" aria-live="off">0:00</b></div>
+          <div class="cvh-tbody"><h3 data-i="cvTimerH"></h3><p id="cvTimerState" aria-live="polite"></p>
+            <div class="timer-btns"><button class="btn btn-primary" type="button" id="cvTimerGo"></button><button class="btn btn-ghost" type="button" id="cvTimerReset" data-i="tReset"></button></div></div>
+        </div>
+        <a class="cvh-call" href="tel:103"><b>103</b><span><span data-i="callLbl"></span> <span id="cvCallIf"></span></span></a>
+      </section>
       <p class="form-note" data-i="cvNote"></p>
     </article>
     <article class="ecard" id="cvError" hidden>
@@ -1751,6 +1823,8 @@ footer .foot{container-type:inline-size}
           <div><h3 data-i="f4h"></h3><p data-i="f4p"></p></div>
         </div>
       </div>
+      <div class="feat-nav"><span class="feat-count" id="featCount" aria-hidden="true">1 / 4</span>
+        <div class="feat-btns"><button class="icon-btn" type="button" id="featPrev" data-i-aria="featPrev"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="icon-btn" type="button" id="featNext" data-i-aria="featNext"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div></div>
     </div>
   </section>
 
@@ -1959,12 +2033,8 @@ footer .foot{container-type:inline-size}
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 <canvas id="confetti" aria-hidden="true"></canvas>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
+function __boot(){
 (function(){
 const T = {
 ru:{
@@ -2308,7 +2378,7 @@ ru:{navAid:"Первая помощь", npNext:"Дальше", hudLbl:"Разб�
   ex1p:"Три шага от регистрации до готового QR‑кода и пример страницы, которую увидит врач.", ex2p:"3D‑модель, цвета, размеры и характеристики браслета.", ex3p:"Пошаговые инструкции и таймер приступа для тех, кто оказался рядом.",
   aidH:"Что делать, если человек потерял сознание", aidLead:"Короткие инструкции для тех, кто оказался рядом. Выберите ситуацию.",
   dontLbl:"Нельзя", callLbl:"Звоните 103, если", aidNote:"Инструкции общие и не заменяют обучение первой помощи. При любых сомнениях звоните 103.",
-  timerH:"Таймер приступа", timerP:"Засеките время. Если приступ длится дольше 5 минут, звоните 103.", tStart:"Старт", tStop:"Стоп", tReset:"Сброс", tIdle:"Готов", tRun:"Идёт отсчёт", tAlert:"Прошло 5 минут. Звоните 103",
+  timerH:"Таймер приступа", timerP:"Засеките время. Если приступ длится дольше 5 минут, звоните 103.", tStart:"Запустить", tStop:"Остановить", tReset:"Сбросить", tIdle:"Готов", tRun:"Идёт отсчёт", tAlert:"Прошло 5 минут. Звоните 103",
   a_epi_1:"Положите человека на бок, под голову подложите что‑нибудь мягкое.", a_epi_2:"Уберите твёрдые и острые предметы, расстегните воротник.", a_epi_3:"Засеките, сколько длится приступ.", a_epi_x:"Не удерживайте человека силой и ничего не кладите ему в рот.", a_epi_c:"приступ длится дольше 5 минут, повторяется или человек получил травму.",
   a_dia_1:"Если человек в сознании, дайте сладкий сок, сахар или глюкозу.", a_dia_2:"Через 10–15 минут проверьте состояние. Если не стало лучше, повторите.", a_dia_3:"Если человек без сознания, положите его на бок.", a_dia_x:"Не давайте еду и питьё человеку без сознания и не вводите инсулин.", a_dia_c:"человек потерял сознание или через 15 минут ему не стало лучше.",
   a_syn_1:"Положите человека на спину и приподнимите ноги на 20–30 см.", a_syn_2:"Ослабьте тесную одежду и откройте доступ свежему воздуху.", a_syn_3:"Когда придёт в себя, дайте несколько минут полежать.", a_syn_x:"Не поднимайте человека сразу и не давайте пить, пока он полностью не пришёл в себя.", a_syn_c:"человек не приходит в себя в течение минуты.",
@@ -2332,6 +2402,19 @@ en:{navAid:"First aid", npNext:"Next", hudLbl:"Exploded", exK:"Explore", exH:"Se
   a_syn_1:"Lay the person on their back and raise their legs 20–30 cm.", a_syn_2:"Loosen tight clothing and let fresh air in.", a_syn_3:"Once they come round, let them rest lying down for a few minutes.", a_syn_x:"Don't sit them up straight away or give drinks until they're fully awake.", a_syn_c:"the person doesn't come round within a minute.",
   a_heart_1:"Call 103 right away.", a_heart_2:"Check breathing. If there is none, push on the centre of the chest 100–120 times a minute.", a_heart_3:"If a defibrillator (AED) is nearby, switch it on and follow its voice prompts.", a_heart_x:"Don't stop compressions until the ambulance arrives.", a_heart_c:"the person suddenly collapses and doesn't respond."}};
 for(const l in T8) Object.assign(T[l],T8[l]);
+const T9={
+ru:{cvHelpH:"Как помочь прямо сейчас", cvGen:"Потеря сознания", cvTimerH:"Засеките время", cvTAlert:"Пора звонить 103", cvTNo:"Предупредим через {n} мин.", cvSms:"Отправить близкому, где мы", cvLocating:"Определяем место…",
+  cvSmsBody:"HealthNote: {name} стало плохо. Я рядом и помогаю.", cvSmsWhere:"Мы здесь:", cvGeoFail:"Не удалось определить место. Сообщение уйдёт без адреса.",
+  a_gen_1:"Проверьте, дышит ли человек: наклонитесь к его лицу на 10 секунд.", a_gen_2:"Если дышит, положите его на бок и слегка запрокиньте голову, чтобы дыхание было свободным.", a_gen_3:"Если не дышит, звоните 103 и давите на центр груди 100–120 раз в минуту.", a_gen_x:"Не оставляйте человека одного и не давайте ему пить.", a_gen_c:"человек не приходит в себя или плохо дышит."},
+kk:{cvHelpH:"Қазір қалай көмектесуге болады", cvGen:"Есінен тану", cvTimerH:"Уақытты белгілеңіз", cvTAlert:"103‑ке қоңырау шалатын уақыт", cvTNo:"{n} минуттан кейін ескертеміз.", cvSms:"Жақынына орынды жіберу", cvLocating:"Орын анықталуда…",
+  cvSmsBody:"HealthNote: {name} жағдайы нашарлады. Мен қасындамын, көмектесіп жатырмын.", cvSmsWhere:"Біз осындамыз:", cvGeoFail:"Орынды анықтау мүмкін болмады. Хабар мекенжайсыз жіберіледі.",
+  a_gen_1:"Адамның тыныс алып жатқанын тексеріңіз: 10 секунд бетіне еңкейіңіз.", a_gen_2:"Тыныс алса, бүйіріне жатқызып, тынысы еркін болу үшін басын сәл шалқайтыңыз.", a_gen_3:"Тыныс алмаса, 103‑ке қоңырау шалып, кеуденің ортасын минутына 100–120 рет басыңыз.", a_gen_x:"Адамды жалғыз қалдырмаңыз және сусын бермеңіз.", a_gen_c:"адам есін жимаса немесе нашар тыныс алса."},
+en:{cvHelpH:"How to help right now", cvGen:"Loss of consciousness", cvTimerH:"Time it", cvTAlert:"Time to call 103", cvTNo:"We'll alert you after {n} min.", cvSms:"Send our location to contact", cvLocating:"Finding location…",
+  cvSmsBody:"HealthNote: {name} has been taken ill. I'm with them and helping.", cvSmsWhere:"We're here:", cvGeoFail:"Couldn't get the location. The message will go without it.",
+  a_gen_1:"Check whether the person is breathing: lean close to their face for 10 seconds.", a_gen_2:"If they are breathing, lay them on their side and tilt their head back slightly so they can breathe freely.", a_gen_3:"If they aren't breathing, call 103 and push on the centre of the chest 100–120 times a minute.", a_gen_x:"Don't leave the person alone and don't give them anything to drink.", a_gen_c:"the person doesn't come round or struggles to breathe."}};
+for(const l in T9) Object.assign(T[l],T9[l]);
+const T10={ru:{featPrev:"Показать предыдущую карточку",featNext:"Показать следующую карточку"},kk:{featPrev:"Алдыңғы карточканы көрсету",featNext:"Келесі карточканы көрсету"},en:{featPrev:"Show previous card",featNext:"Show next card"}};
+for(const l in T10) Object.assign(T[l],T10[l]);
 
 /* ---------- card link codec ---------- */
 // Адрес, на который ведёт QR-код. После размещения сайта впишите сюда его адрес, например "https://healthnote.kz/".
@@ -2365,7 +2448,8 @@ async function decodeCard(code){
 const $ = id => document.getElementById(id);
 const root = document.documentElement;
 // animations are on unless the visitor switched them off in the footer (stored on this device)
-const reduced = (()=>{ try{ return JSON.parse(localStorage.getItem('hn_motion'))==='off'; }catch(e){ return false; } })();
+const osCalm = matchMedia('(prefers-reduced-motion: reduce)').matches;   // the system setting counts unless the footer switch was used
+const reduced = (()=>{ try{ const m=JSON.parse(localStorage.getItem('hn_motion')); return m==='off' || (m==null && osCalm); }catch(e){ return osCalm; } })();
 if(reduced) document.documentElement.classList.add('calm');
 const store = {
   get(k){ try{ return JSON.parse(localStorage.getItem(k)); }catch(e){ return null; } },
@@ -2868,7 +2952,10 @@ if('IntersectionObserver' in window){ const bo=new IntersectionObserver(es=>{ if
     const pxPerUnit=H/(2*halfH);
     posB=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH];
     sB=Math.min(comp.w/(3.7*pxPerUnit), comp.h/(4.9*pxPerUnit));
-    if(!bigQ.matches){ posA=posB; sA=sB; }
+    if(!bigQ.matches && nar){ // phones: the assembled bracelet fills its box; it only shrinks while it comes apart
+      cx=visR.x+visR.w/2; cy=visR.y+visR.h*.5; posA=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH];
+      sA=Math.min(visR.w/(3.25*pxPerUnit), visR.h/(3.6*pxPerUnit)); }
+    else if(!bigQ.matches){ posA=posB; sA=sB; }
     else { cx=visR.x+visR.w*.54; cy=visR.y+visR.h*.72; posA=[(cx/W*2-1)*halfW, -(cy/H*2-1)*halfH]; sA=Math.min(visR.w/(3.5*pxPerUnit), visR.h/(4.35*pxPerUnit)); }
     s=sA; rig.position.set(posA[0],posA[1],0);
     rig.scale.setScalar(s);
@@ -3123,6 +3210,17 @@ function tmRender(){
 $('timerGo').addEventListener('click',()=>{ if(tm.run){ tm.acc+=performance.now()-tm.t0; tm.run=false; cancelAnimationFrame(tm.raf); } else { tm.t0=performance.now(); tm.run=true; } tmRender(); });
 $('timerReset').addEventListener('click',()=>{ tm.acc=0; tm.run=false; cancelAnimationFrame(tm.raf); tmRender(); });
 
+/* ---------- features: arrows and counter for the phone swipe ---------- */
+(function featSwipe(){
+  const tr=document.querySelector('.features'), cards=[...tr.children], prev=$('featPrev'), next=$('featNext'), cnt=$('featCount');
+  const idx=()=>{ const x=tr.scrollLeft; let best=0,bd=1e9; cards.forEach((c,i)=>{ const d=Math.abs(c.offsetLeft-tr.offsetLeft-16-x); if(d<bd){bd=d;best=i;} }); return best; };
+  function sync(){ const i=idx(), end=tr.scrollLeft+tr.clientWidth>=tr.scrollWidth-4; prev.disabled=i===0&&tr.scrollLeft<4; next.disabled=end; cnt.textContent=(end?cards.length:i+1)+' / '+cards.length; }
+  function go(d){ const i=Math.max(0,Math.min(cards.length-1,idx()+d)); tr.scrollTo({left:cards[i].offsetLeft-tr.offsetLeft-16,behavior:reduced?'auto':'smooth'}); }
+  prev.addEventListener('click',()=>go(-1)); next.addEventListener('click',()=>go(1));
+  let raf=0; tr.addEventListener('scroll',()=>{ if(!raf) raf=requestAnimationFrame(()=>{ raf=0; sync(); }); },{passive:true});
+  addEventListener('resize',sync); sync();
+})();
+
 /* ---------- pointer effects (mouse only) ---------- */
 if(fine && !reduced){
   // buttons: the fill circle starts where the pointer came in and leaves where it went out
@@ -3196,12 +3294,66 @@ function fillCardView(){
   $('cvPhone').textContent = phone || t('cvNone');
   const num=(phone.match(/\+?\d[\d\s()‑-]{5,}\d/)||[''])[0].replace(/[^\d+]/g,'');
   $('cvCall').hidden=!num; if(num) $('cvCall').href='tel:'+num;
+  $('cvSms').hidden=!num;
+  fillHelp();
 }
+/* first aid inside the scanned card: pick instructions from the diagnosis, a timer, and an SMS with the location */
+const HELP_RX={epi:/эпилеп|судорог|ұстама|epilep|seizure/i, dia:/диабет|гипогл|инсулин|қант|diabet|hypogly|insulin/i,
+  heart:/сердц|аритм|кардио|инфаркт|стенокард|жүрек|heart|cardi|arrhythm|pacemaker/i, syn:/обморок|синкоп|талма|тал(у|ып)|faint|syncope/i};
+const HELP_LIMIT={epi:300,syn:60,dia:900,heart:0,gen:0};
+let cvKey='gen';
+function helpKey(){ const txt=viewing ? [viewing[7],viewing[5]].join(' ') : ''; for(const k of ['epi','dia','heart','syn']) if(HELP_RX[k].test(txt)) return k; return 'gen'; }
+function fillHelp(){
+  cvKey=helpKey();
+  $('cvHelpFor').textContent = cvKey==='gen' ? t('cvGen') : t('p_'+cvKey+'_n');
+  const ol=$('cvSteps'); ol.textContent='';
+  [1,2,3].forEach(i=>{ const li=document.createElement('li'); li.textContent=t('a_'+cvKey+'_'+i); ol.appendChild(li); });
+  $('cvDont').textContent=t('a_'+cvKey+'_x'); $('cvCallIf').textContent=t('a_'+cvKey+'_c');
+  cvtRender();
+}
+const cvt={t0:0,acc:0,run:false,raf:0,buzzed:false,lock:null};
+function cvtRender(){
+  const sec=(cvt.acc+(cvt.run?performance.now()-cvt.t0:0))/1000, lim=HELP_LIMIT[cvKey]||0, m=Math.floor(sec/60), ss=Math.floor(sec%60), over=lim>0&&sec>=lim;
+  $('cvTimerVal').textContent=m+':'+String(ss).padStart(2,'0');
+  $('cvTimerArc').style.strokeDashoffset=String(lim ? 1-Math.min(1,sec/lim) : 1-((sec%60)/60));
+  $('cvTimer').classList.toggle('alert',over);
+  const st = over ? t('cvTAlert') : cvt.run ? t('tRun') : (sec>0||!lim ? '' : t('cvTNo').replace('{n}',lim/60));
+  if($('cvTimerState').textContent!==st) $('cvTimerState').textContent=st;
+  $('cvTimerGo').textContent=t(cvt.run?'tStop':'tStart');
+  if(over && !cvt.buzzed){ cvt.buzzed=true; try{ navigator.vibrate && navigator.vibrate([400,200,400,200,400]); }catch(e){} }
+  if(cvt.run) cvt.raf=requestAnimationFrame(cvtRender);
+}
+async function cvtLock(on){
+  try{ if(on && 'wakeLock' in navigator && !cvt.lock){ cvt.lock=await navigator.wakeLock.request('screen'); cvt.lock.addEventListener('release',()=>{ cvt.lock=null; }); }
+       else if(!on && cvt.lock){ await cvt.lock.release(); cvt.lock=null; } }catch(e){}
+}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden && cvt.run) cvtLock(true); });
+$('cvTimerGo').addEventListener('click',()=>{
+  if(cvt.run){ cvt.acc+=performance.now()-cvt.t0; cvt.run=false; cancelAnimationFrame(cvt.raf); cvtLock(false); }
+  else { cvt.t0=performance.now(); cvt.run=true; cvtLock(true); }
+  cvtRender();
+});
+$('cvTimerReset').addEventListener('click',()=>{ cvt.acc=0; cvt.run=false; cvt.buzzed=false; cancelAnimationFrame(cvt.raf); cvtLock(false); cvtRender(); });
+function contactNum(){ const ph=(viewing&&viewing[8])||''; return (ph.match(/\+?\d[\d\s()‑-]{5,}\d/)||[''])[0].replace(/[^\d+]/g,''); }
+$('cvSms').addEventListener('click',()=>{
+  const num=contactNum(); if(!num) return;
+  const btn=$('cvSms'), name=(viewing&&viewing[2])||t('cvNoName');
+  const send=pos=>{
+    let body=t('cvSmsBody').replace('{name}',name);
+    if(pos) body+=' '+t('cvSmsWhere')+' https://maps.google.com/?q='+pos.coords.latitude.toFixed(5)+','+pos.coords.longitude.toFixed(5);
+    btn.disabled=false; btn.textContent=t('cvSms');
+    location.href='sms:'+num+'?&body='+encodeURIComponent(body);
+  };
+  if(!('geolocation' in navigator)){ send(null); return; }
+  btn.disabled=true; btn.textContent=t('cvLocating');
+  navigator.geolocation.getCurrentPosition(send,()=>{ toast(t('cvGeoFail')); send(null); },{enableHighAccuracy:true,timeout:8000,maximumAge:60000});
+});
 async function route(){
   const m=/^#card-([0-9a-z]+)$/.exec(location.hash);
   if(!m){
     const was=document.body.classList.contains('card-mode');
     document.body.classList.remove('card-mode'); $('cardView').hidden=true; viewing=null;
+    if(was && !window.__libsLoaded){ location.reload(); return; }  // the card opened without the heavy libraries: load the full site
     const id=(location.hash||'').slice(1); if(was) curPage=null;
     showPage(PAGE_OF[id]||'home', id);
     return;
@@ -3432,14 +3584,6 @@ if(G && ST && !reduced){
     G.fromTo(p,{scale:.9,y:80},{scale:1,y:0,ease:'none',scrollTrigger:{trigger:p,start:'top bottom',end:'top 50%',scrub:.5}});
   });
   if(footWord) G.from(footWord.children,{yPercent:108,duration:1.2,ease:'expo.out',stagger:.045,scrollTrigger:{trigger:footWord,start:'top 94%'}});
-  // features: the section pins and its cards travel sideways (desktop only)
-  const mm=G.matchMedia();
-  mm.add('(min-width:1021px) and (min-height:620px)',()=>{
-    const sec=$('features'), tr=sec.querySelector('.features'); sec.classList.add('hz-on'); tr.classList.add('hz');
-    const dist=()=>Math.max(0,tr.offsetWidth-(tr.parentElement.clientWidth-parseFloat(getComputedStyle(tr.parentElement).paddingLeft)*2));
-    G.to(tr,{x:()=>-dist(),ease:'none',scrollTrigger:{trigger:sec,pin:true,start:'top top',end:()=>'+='+Math.max(300,dist()),scrub:.8,invalidateOnRefresh:true,anticipatePin:1}});
-    return ()=>{ sec.classList.remove('hz-on'); tr.classList.remove('hz'); G.set(tr,{clearProps:'transform'}); };
-  });
 }
 
 const _apply6=applyLang; applyLang=function(a){ _apply6(a); fitTitle(); navPillSync(); if(a && ST) ST.refresh(); };
@@ -3449,6 +3593,8 @@ render(true);
 applyLang(false);
 route();
 })();
+}
+(window.__libs||Promise.resolve()).then(__boot);
 </script>
 
 </body>
