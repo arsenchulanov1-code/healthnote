@@ -337,7 +337,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 .br-stage canvas{position:absolute;inset:0;width:100%;height:100%;display:block;cursor:grab;touch-action:pan-y}
 .br-stage canvas:active{cursor:grabbing}
 .br-stage canvas:focus-visible{outline:3px solid var(--pink);outline-offset:-6px}
-.br-hint{position:absolute;left:16px;bottom:16px;right:120px;font-size:14px;font-weight:700;color:var(--muted);pointer-events:none}
 .br-tools{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
 .br-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font-weight:700;color:var(--muted)}
 .icon-btn[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:var(--on-jade)}
@@ -1855,7 +1854,6 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
       <div class="br-grid">
         <div class="br-stage" id="brStage">
           <canvas id="brCanvas" tabindex="0" role="img" data-i-aria="brAria"></canvas>
-          <p class="br-hint" id="brHint" data-i="brHint"></p>
           <div class="br-fallback" id="brFallback" data-i="brFallback" hidden></div>
           <div class="br-tools">
             <button class="icon-btn" type="button" id="brSpin" data-i-aria="brSpin" data-i-title="brSpin"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/></svg></button>
@@ -2349,19 +2347,19 @@ en:{heroLead:"HealthNote packs the essentials about your health into a compact Q
 for(const l in T2) Object.assign(T[l],T2[l]);
 const T3={
 ru:{navBracelet:"Браслет", brH:"Браслет HealthNote", brLead:"Силиконовый браслет со стальной пластиной, на которой выгравирован ваш QR‑код. Он всегда на руке, даже если телефон разряжен или заблокирован.",
-  brHint:"Потяните, чтобы покрутить. Двойной клик раскручивает браслет.", brFallback:"Браузер не может показать 3D‑модель. Откройте страницу в Chrome или Safari.",
+  brFallback:"Браузер не может показать 3D‑модель. Откройте страницу в Chrome или Safari.",
   brAria:"3D‑модель браслета HealthNote. Потяните или нажимайте стрелки, чтобы повернуть", brSpin:"Раскрутить", brAuto:"Автовращение", brReset:"Сбросить вид",
   brColor:"Цвет ремешка", brSize:"Размер по обхвату запястья", brEngrave:"Надпись на пластине", brEngraveHint:"До 18 символов. Надпись сразу появится на модели.", brScan:"Сканируйте в экстренной ситуации",
   sp1k:"Ремешок", sp1v:"Гипоаллергенный медицинский силикон", sp2k:"Пластина", sp2v:"Нержавеющая сталь, лазерная гравировка QR‑кода", sp3k:"Вода", sp3v:"Можно носить в душе и бассейне",
   sp5k:"Питание", sp5v:"Не нужно. QR‑код читается всегда, без батарейки и зарядки", brCta:"Создать QR для браслета"},
 kk:{navBracelet:"Білезік", brH:"HealthNote білезігі", brLead:"Болат пластинасы бар силикон білезік, пластинаға QR‑кодыңыз ойып жазылады. Телефон отырып қалса немесе құлыпталса да, ол әрдайым қолыңызда.",
-  brHint:"Айналдыру үшін тартыңыз. Екі рет бассаңыз, білезік қатты айналады.", brFallback:"Браузер 3D‑модельді көрсете алмайды. Бетті Chrome немесе Safari арқылы ашыңыз.",
+  brFallback:"Браузер 3D‑модельді көрсете алмайды. Бетті Chrome немесе Safari арқылы ашыңыз.",
   brAria:"HealthNote білезігінің 3D‑моделі. Бұру үшін тартыңыз немесе бағыт пернелерін басыңыз", brSpin:"Айналдыру", brAuto:"Автоайналу", brReset:"Көріністі қалпына келтіру",
   brColor:"Бау түсі", brSize:"Білек айналымы бойынша өлшем", brEngrave:"Пластинадағы жазу", brEngraveHint:"18 таңбаға дейін. Жазу модельде бірден көрінеді.", brScan:"Шұғыл жағдайда сканерлеңіз",
   sp1k:"Бау", sp1v:"Гипоаллергенді медициналық силикон", sp2k:"Пластина", sp2v:"Тот баспайтын болат, QR‑кодтың лазерлік гравировкасы", sp3k:"Су", sp3v:"Душта және бассейнде тағуға болады",
   sp5k:"Қуат", sp5v:"Қажет емес. QR‑код батареясыз және зарядсыз әрдайым оқылады", brCta:"Білезікке QR жасау"},
 en:{navBracelet:"Bracelet", brH:"HealthNote bracelet", brLead:"A silicone bracelet with a steel plate engraved with your QR code. It stays on your wrist even when your phone is dead or locked.",
-  brHint:"Drag to rotate. Double‑click to give it a spin.", brFallback:"Your browser can't show the 3D model. Open the page in Chrome or Safari.",
+  brFallback:"Your browser can't show the 3D model. Open the page in Chrome or Safari.",
   brAria:"3D model of the HealthNote bracelet. Drag or use arrow keys to rotate", brSpin:"Spin", brAuto:"Auto‑rotate", brReset:"Reset view",
   brColor:"Band colour", brSize:"Size by wrist circumference", brEngrave:"Plate engraving", brEngraveHint:"Up to 18 characters. It appears on the model right away.", brScan:"Scan in an emergency",
   sp1k:"Band", sp1v:"Hypoallergenic medical‑grade silicone", sp2k:"Plate", sp2v:"Stainless steel, laser‑engraved QR code", sp3k:"Water", sp3v:"Safe to wear in the shower and pool",
@@ -2993,9 +2991,9 @@ let brReady=false;
 function bracelet(){
   if(brReady) return; brReady=true;
   const canvas=$('brCanvas'), stage=$('brStage');
-  if(typeof THREE==='undefined'){ $('brFallback').hidden=false; canvas.hidden=true; $('brHint').hidden=true; return; }
+  if(typeof THREE==='undefined'){ $('brFallback').hidden=false; canvas.hidden=true; return; }
   let renderer;
-  try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ $('brFallback').hidden=false; canvas.hidden=true; $('brHint').hidden=true; return; }
+  try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ $('brFallback').hidden=false; canvas.hidden=true; return; }
   renderer.setPixelRatio(Math.min(2,devicePixelRatio||1));
   renderer.outputEncoding=THREE.sRGBEncoding;
   renderer.toneMapping=THREE.ACESFilmicToneMapping; renderer.toneMappingExposure=1.02;
@@ -3019,7 +3017,7 @@ function bracelet(){
   const base={x:.3,y:-.2}; let rx=base.x, ry=base.y, vx=0, vy=0, drag=null, auto=!reduced, scale=1, scaleT=1;
   const targetColor=new THREE.Color('#2F6BFF').convertSRGBToLinear();
   $('brAuto').setAttribute('aria-pressed',String(auto));
-  canvas.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,t:performance.now()}; canvas.setPointerCapture(e.pointerId); vx=vy=0; $('brHint').style.opacity='0'; });
+  canvas.addEventListener('pointerdown',e=>{ drag={x:e.clientX,y:e.clientY,t:performance.now()}; canvas.setPointerCapture(e.pointerId); vx=vy=0; });
   canvas.addEventListener('pointermove',e=>{ if(!drag) return; const dx=e.clientX-drag.x, dy=e.clientY-drag.y; drag.x=e.clientX; drag.y=e.clientY;
     vy=dx*.008; vx=e.pointerType==='touch'?0:dy*.006; ry+=vy; rx=Math.max(-1.1,Math.min(1.2,rx+vx)); });
   const end=()=>{ drag=null; }; canvas.addEventListener('pointerup',end); canvas.addEventListener('pointercancel',end);
