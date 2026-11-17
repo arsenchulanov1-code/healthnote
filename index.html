@@ -1881,11 +1881,6 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
                 <button type="button" class="chip" data-size="1.1" aria-pressed="false">L · 19–21 см</button>
               </div>
             </div>
-            <div class="field">
-              <label for="brText" data-i="brEngrave"></label>
-              <input id="brText" maxlength="18">
-              <div class="hint" data-i="brEngraveHint"></div>
-            </div>
           </div>
           <dl class="specs">
             <div><dt data-i="sp1k"></dt><dd data-i="sp1v"></dd></div>
@@ -2349,19 +2344,19 @@ const T3={
 ru:{navBracelet:"Браслет", brH:"Браслет HealthNote", brLead:"Силиконовый браслет со стальной пластиной, на которой выгравирован ваш QR‑код. Он всегда на руке, даже если телефон разряжен или заблокирован.",
   brFallback:"Браузер не может показать 3D‑модель. Откройте страницу в Chrome или Safari.",
   brAria:"3D‑модель браслета HealthNote. Потяните или нажимайте стрелки, чтобы повернуть", brSpin:"Раскрутить", brAuto:"Автовращение", brReset:"Сбросить вид",
-  brColor:"Цвет ремешка", brSize:"Размер по обхвату запястья", brEngrave:"Надпись на пластине", brEngraveHint:"До 18 символов. Надпись сразу появится на модели.", brScan:"Сканируйте в экстренной ситуации",
+  brColor:"Цвет ремешка", brSize:"Размер по обхвату запястья", brScan:"Сканируйте в экстренной ситуации",
   sp1k:"Ремешок", sp1v:"Гипоаллергенный медицинский силикон", sp2k:"Пластина", sp2v:"Нержавеющая сталь, лазерная гравировка QR‑кода", sp3k:"Вода", sp3v:"Можно носить в душе и бассейне",
   sp5k:"Питание", sp5v:"Не нужно. QR‑код читается всегда, без батарейки и зарядки", brCta:"Создать QR для браслета"},
 kk:{navBracelet:"Білезік", brH:"HealthNote білезігі", brLead:"Болат пластинасы бар силикон білезік, пластинаға QR‑кодыңыз ойып жазылады. Телефон отырып қалса немесе құлыпталса да, ол әрдайым қолыңызда.",
   brFallback:"Браузер 3D‑модельді көрсете алмайды. Бетті Chrome немесе Safari арқылы ашыңыз.",
   brAria:"HealthNote білезігінің 3D‑моделі. Бұру үшін тартыңыз немесе бағыт пернелерін басыңыз", brSpin:"Айналдыру", brAuto:"Автоайналу", brReset:"Көріністі қалпына келтіру",
-  brColor:"Бау түсі", brSize:"Білек айналымы бойынша өлшем", brEngrave:"Пластинадағы жазу", brEngraveHint:"18 таңбаға дейін. Жазу модельде бірден көрінеді.", brScan:"Шұғыл жағдайда сканерлеңіз",
+  brColor:"Бау түсі", brSize:"Білек айналымы бойынша өлшем", brScan:"Шұғыл жағдайда сканерлеңіз",
   sp1k:"Бау", sp1v:"Гипоаллергенді медициналық силикон", sp2k:"Пластина", sp2v:"Тот баспайтын болат, QR‑кодтың лазерлік гравировкасы", sp3k:"Су", sp3v:"Душта және бассейнде тағуға болады",
   sp5k:"Қуат", sp5v:"Қажет емес. QR‑код батареясыз және зарядсыз әрдайым оқылады", brCta:"Білезікке QR жасау"},
 en:{navBracelet:"Bracelet", brH:"HealthNote bracelet", brLead:"A silicone bracelet with a steel plate engraved with your QR code. It stays on your wrist even when your phone is dead or locked.",
   brFallback:"Your browser can't show the 3D model. Open the page in Chrome or Safari.",
   brAria:"3D model of the HealthNote bracelet. Drag or use arrow keys to rotate", brSpin:"Spin", brAuto:"Auto‑rotate", brReset:"Reset view",
-  brColor:"Band colour", brSize:"Size by wrist circumference", brEngrave:"Plate engraving", brEngraveHint:"Up to 18 characters. It appears on the model right away.", brScan:"Scan in an emergency",
+  brColor:"Band colour", brSize:"Size by wrist circumference", brScan:"Scan in an emergency",
   sp1k:"Band", sp1v:"Hypoallergenic medical‑grade silicone", sp2k:"Plate", sp2v:"Stainless steel, laser‑engraved QR code", sp3k:"Water", sp3v:"Safe to wear in the shower and pool",
   sp5k:"Power", sp5v:"None needed. The QR code always works, no battery or charging", brCta:"Create a QR for your bracelet"}};
 for(const l in T3) Object.assign(T[l],T3[l]);
@@ -2376,7 +2371,7 @@ ru:{eyebrow:"Медицинский браслет с QR‑кодом",
   xpBandH:"Браслет", xpBandP:"Медицинский силикон и корпус IP67. Можно носить в душе и бассейне.",
   demoH:"Так выглядит медкарта", demoLead:"Эти данные откроются, когда врач отсканирует QR‑код на браслете. Поменяйте группу крови и посмотрите, как изменится код.",
   brLead:"Силиконовый браслет с E‑ink дисплеем, на котором всегда виден ваш QR‑код. Он на руке, даже если телефон разряжен или заблокирован.",
-  brEngrave:"Надпись на экране", sp2k:"Дисплей", sp2v:"E‑ink, QR‑код виден даже без заряда",
+  sp2k:"Дисплей", sp2v:"E‑ink, QR‑код виден даже без заряда",
   sp5k:"Питание", sp5v:"Аккумулятор 180 мА·ч, около месяца без подзарядки"},
 kk:{eyebrow:"QR‑кодты медициналық білезік",
   heroAria:"Анимация: HealthNote білезігі дисплейге, аккумуляторға, түймеге және бауға бөлшектенеді",
@@ -2388,7 +2383,7 @@ kk:{eyebrow:"QR‑кодты медициналық білезік",
   xpBandH:"Білезік", xpBandP:"Медициналық силикон және IP67 корпус. Душта және бассейнде тағуға болады.",
   demoH:"Медкарта осылай көрінеді", demoLead:"Дәрігер білезіктегі QR‑кодты сканерлегенде осы деректер ашылады. Қан тобын өзгертіп, кодтың қалай өзгеретінін көріңіз.",
   brLead:"QR‑кодыңыз әрдайым көрініп тұратын E‑ink дисплейі бар силикон білезік. Телефон отырып қалса немесе құлыпталса да, ол қолыңызда.",
-  brEngrave:"Экрандағы жазу", sp2k:"Дисплей", sp2v:"E‑ink, QR‑код зарядсыз да көрінеді",
+  sp2k:"Дисплей", sp2v:"E‑ink, QR‑код зарядсыз да көрінеді",
   sp5k:"Қуат", sp5v:"180 мА·сағ аккумулятор, зарядсыз шамамен бір ай"},
 en:{eyebrow:"Medical bracelet with a QR code",
   heroAria:"Animation: the HealthNote bracelet comes apart into its display, battery, button and band",
@@ -2400,7 +2395,7 @@ en:{eyebrow:"Medical bracelet with a QR code",
   xpBandH:"Band", xpBandP:"Medical‑grade silicone and an IP67 case. Fine in the shower and pool.",
   demoH:"This is what the card looks like", demoLead:"This is what opens when a doctor scans the QR code on the bracelet. Change the blood type and watch the code update.",
   brLead:"A silicone bracelet with an E‑ink display that always shows your QR code. It stays on your wrist even when your phone is dead or locked.",
-  brEngrave:"Text on the screen", sp2k:"Display", sp2v:"E‑ink, the QR code stays visible with no charge",
+  sp2k:"Display", sp2v:"E‑ink, the QR code stays visible with no charge",
   sp5k:"Power", sp5v:"180 mAh battery, about a month per charge"}};
 for(const l in T4) Object.assign(T[l],T4[l]);
 // Focus: people who may lose consciousness (epilepsy, diabetes, fainting, heart conditions).
@@ -2861,7 +2856,7 @@ function apSync(){
 $('regName').addEventListener('input',apSync);
 
 function render(fresh){
-  const u=session&&users[session]; if(fresh){ brTextDirty=false; updatePlate(); }
+  const u=session&&users[session]; if(fresh) updatePlate();
   $('authView').hidden=!!u; $('workspace').hidden=!u; $('authPreview').hidden=!!u; if(!u) apSync();
   $('headerCta').textContent=t(u?'ctaMine':'ctaCreate');
   $('accountTitle').textContent=t(u?'accUserH':'accGuestH');
@@ -2874,16 +2869,14 @@ function render(fresh){
   if(typeof applyImport==='function') applyImport();
 }
 /* ---------- 3D bracelet ---------- */
-let heroUrl='', brTextDirty=false, plateDirty=true;
+let heroUrl='', plateDirty=true;
 function plateData(){
   const u=session&&users[session];
-  const name = brTextDirty ? $('brText').value : (u ? u.name : t('sampleName'));
-  if(!brTextDirty) $('brText').value=name;
+  const name = u ? u.name : t('sampleName');
   const blood = u ? (u.card&&u.card.blood) || '' : sampleBlood;
   return { name, blood, url: (u && lastText) || heroUrl };
 }
 function updatePlate(){ plateDirty=true; }
-$('brText').addEventListener('input',()=>{ brTextDirty=true; updatePlate(); });
 
 // a tiny procedural photo studio (soft boxes on dark walls) baked into an environment map, so clearcoat, glass and steel have something to reflect
 function studioEnv(renderer){
