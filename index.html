@@ -2943,11 +2943,11 @@ function buildBraceletModel(renderer){
   const dispZ0=zTop+.035;
   let lastKey='';
   function drawScreen(force){
-    const d=(typeof plateData==='function')?plateData():{url:'',name:'',blood:''}, k=d.url+'|'+d.name+'|'+d.blood+'|'+lang;
+    const d=(typeof plateData==='function')?plateData():{url:'',name:'',blood:''}, k=d.url;
     if(k===lastKey && !force) return; lastKey=k;
     const c=sc.c.getContext('2d'), W=640, H=400;
     c.fillStyle='#E7ECE8'; c.fillRect(0,0,W,H);
-    const q=H-48, qx=24, qy=24;
+    const q=H-48, qx=(W-q)/2, qy=24;
     c.fillStyle='#F6F8F6'; c.fillRect(qx,qy,q,q);
     if(typeof qrcode==='function' && d.url){
       qrcode.stringToBytes=s=>Array.from(new TextEncoder().encode(s));
@@ -2955,16 +2955,6 @@ function buildBraceletModel(renderer){
       const n=qr.getModuleCount(), m=(q-20)/n; c.fillStyle='#1A201E';
       for(let y=0;y<n;y++) for(let x=0;x<n;x++) if(qr.isDark(y,x)) c.fillRect(qx+10+x*m,qy+10+y*m,Math.ceil(m),Math.ceil(m));
     }
-    const tx=qx+q+22, mw=W-tx-18;
-    c.fillStyle='#1A201E'; c.textBaseline='middle';
-    c.fillStyle='#E0306E'; c.beginPath(); c.arc(tx+10,52,9,0,Math.PI*2); c.fill();
-    c.fillStyle='#1A201E'; c.font='800 26px Onest, Arial, sans-serif'; c.fillText('SOS',tx+28,53);
-    const words=(d.name||'').trim().split(/\s+/), l1=words[0]||' ', l2=words.slice(1).join(' ');
-    let fs=34; c.font=`800 ${fs}px Onest, Arial, sans-serif`;
-    while(Math.max(c.measureText(l1).width,c.measureText(l2).width)>mw && fs>16){ fs-=2; c.font=`800 ${fs}px Onest, Arial, sans-serif`; }
-    if(l2){ c.fillText(l1,tx,118); c.fillText(l2,tx,118+fs*1.15); } else c.fillText(l1,tx,140);
-    if(d.blood){ c.font='800 30px Onest, Arial, sans-serif'; c.fillText(d.blood.replace(' ',''),tx,226); }
-    c.strokeStyle='#1A201E'; c.lineWidth=3; c.strokeRect(tx,330,42,22); c.fillRect(tx+42,336,5,10); c.fillRect(tx+4,334,26,14);
     sc.t.needsUpdate=true;
   }
 
