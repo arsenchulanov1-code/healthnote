@@ -340,7 +340,6 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;align-ite
 .br-hint{position:absolute;left:16px;bottom:16px;right:120px;font-size:14px;font-weight:700;color:var(--muted);pointer-events:none}
 .br-tools{position:absolute;right:14px;bottom:14px;display:flex;gap:8px}
 .br-fallback{position:absolute;inset:0;display:grid;place-items:center;padding:24px;text-align:center;font-weight:700;color:var(--muted)}
-.br-tag{position:absolute;left:16px;top:16px;background:var(--ink);color:var(--bg);font:800 13px var(--f-body);padding:6px 12px;border-radius:999px;pointer-events:none}
 .icon-btn[aria-pressed="true"]{background:var(--jade);border-color:var(--jade);color:var(--on-jade)}
 .br-side{display:grid;gap:18px;align-content:start}
 .br-controls{display:grid;gap:18px;padding:24px;border-radius:var(--r-lg);background:var(--surface);border:2px solid var(--line)}
@@ -602,7 +601,7 @@ header.top{background:color-mix(in srgb,var(--bg) 78%,transparent);border-bottom
 .quote{background:radial-gradient(120% 140% at 100% 0%,rgba(47,107,255,.35),transparent 55%),#10131A;color:var(--ink);border:1px solid color-mix(in srgb,var(--jade) 35%,var(--line));
   font:600 clamp(20px,2.4vw,30px)/1.35 var(--f-display);letter-spacing:-.02em;padding:clamp(28px,4vw,52px)}
 .account{background:#08090B;color:var(--ink);border-top:1px solid var(--line)}
-.br-tag,.sample-flag{background:var(--jade);color:var(--on-jade)}
+.sample-flag{background:var(--jade);color:var(--on-jade)}
 .account .lead{color:var(--muted)}
 .account::after{background:var(--pink)}
 footer{background:#08090B;border-top:1px solid var(--line)}
@@ -1408,7 +1407,6 @@ nav.links a[aria-current],nav.links a:hover{color:var(--ink)}
 .br-stage{height:clamp(400px,50vw,640px);border-radius:var(--r-xl);border-color:var(--glass-line);
   background:radial-gradient(90% 80% at 30% 15%,rgba(47,107,255,.34),transparent 62%),radial-gradient(80% 70% at 90% 95%,rgba(53,208,255,.16),transparent 60%),#080C19}
 .br-controls{border-radius:var(--r-lg);border-color:var(--glass-line);background:var(--glass);-webkit-backdrop-filter:blur(16px);backdrop-filter:blur(16px);padding:28px}
-.br-tag{font:600 13px var(--f-body);padding:8px 14px}
 .specs dt{font-weight:600}
 .swatch{width:36px;height:36px}
 
@@ -1857,7 +1855,6 @@ window.__libs=Promise.all(L.map(function(u){return new Promise(function(r){var s
       <div class="br-grid">
         <div class="br-stage" id="brStage">
           <canvas id="brCanvas" tabindex="0" role="img" data-i-aria="brAria"></canvas>
-          <span class="br-tag" data-i="br3d"></span>
           <p class="br-hint" id="brHint" data-i="brHint"></p>
           <div class="br-fallback" id="brFallback" data-i="brFallback" hidden></div>
           <div class="br-tools">
@@ -2352,19 +2349,19 @@ en:{heroLead:"HealthNote packs the essentials about your health into a compact Q
 for(const l in T2) Object.assign(T[l],T2[l]);
 const T3={
 ru:{navBracelet:"Браслет", brH:"Браслет HealthNote", brLead:"Силиконовый браслет со стальной пластиной, на которой выгравирован ваш QR‑код. Он всегда на руке, даже если телефон разряжен или заблокирован.",
-  br3d:"3D‑модель", brHint:"Потяните, чтобы покрутить. Двойной клик раскручивает браслет.", brFallback:"Браузер не может показать 3D‑модель. Откройте страницу в Chrome или Safari.",
+  brHint:"Потяните, чтобы покрутить. Двойной клик раскручивает браслет.", brFallback:"Браузер не может показать 3D‑модель. Откройте страницу в Chrome или Safari.",
   brAria:"3D‑модель браслета HealthNote. Потяните или нажимайте стрелки, чтобы повернуть", brSpin:"Раскрутить", brAuto:"Автовращение", brReset:"Сбросить вид",
   brColor:"Цвет ремешка", brSize:"Размер по обхвату запястья", brEngrave:"Надпись на пластине", brEngraveHint:"До 18 символов. Надпись сразу появится на модели.", brScan:"Сканируйте в экстренной ситуации",
   sp1k:"Ремешок", sp1v:"Гипоаллергенный медицинский силикон", sp2k:"Пластина", sp2v:"Нержавеющая сталь, лазерная гравировка QR‑кода", sp3k:"Вода", sp3v:"Можно носить в душе и бассейне",
   sp5k:"Питание", sp5v:"Не нужно. QR‑код читается всегда, без батарейки и зарядки", brCta:"Создать QR для браслета"},
 kk:{navBracelet:"Білезік", brH:"HealthNote білезігі", brLead:"Болат пластинасы бар силикон білезік, пластинаға QR‑кодыңыз ойып жазылады. Телефон отырып қалса немесе құлыпталса да, ол әрдайым қолыңызда.",
-  br3d:"3D‑модель", brHint:"Айналдыру үшін тартыңыз. Екі рет бассаңыз, білезік қатты айналады.", brFallback:"Браузер 3D‑модельді көрсете алмайды. Бетті Chrome немесе Safari арқылы ашыңыз.",
+  brHint:"Айналдыру үшін тартыңыз. Екі рет бассаңыз, білезік қатты айналады.", brFallback:"Браузер 3D‑модельді көрсете алмайды. Бетті Chrome немесе Safari арқылы ашыңыз.",
   brAria:"HealthNote білезігінің 3D‑моделі. Бұру үшін тартыңыз немесе бағыт пернелерін басыңыз", brSpin:"Айналдыру", brAuto:"Автоайналу", brReset:"Көріністі қалпына келтіру",
   brColor:"Бау түсі", brSize:"Білек айналымы бойынша өлшем", brEngrave:"Пластинадағы жазу", brEngraveHint:"18 таңбаға дейін. Жазу модельде бірден көрінеді.", brScan:"Шұғыл жағдайда сканерлеңіз",
   sp1k:"Бау", sp1v:"Гипоаллергенді медициналық силикон", sp2k:"Пластина", sp2v:"Тот баспайтын болат, QR‑кодтың лазерлік гравировкасы", sp3k:"Су", sp3v:"Душта және бассейнде тағуға болады",
   sp5k:"Қуат", sp5v:"Қажет емес. QR‑код батареясыз және зарядсыз әрдайым оқылады", brCta:"Білезікке QR жасау"},
 en:{navBracelet:"Bracelet", brH:"HealthNote bracelet", brLead:"A silicone bracelet with a steel plate engraved with your QR code. It stays on your wrist even when your phone is dead or locked.",
-  br3d:"3D model", brHint:"Drag to rotate. Double‑click to give it a spin.", brFallback:"Your browser can't show the 3D model. Open the page in Chrome or Safari.",
+  brHint:"Drag to rotate. Double‑click to give it a spin.", brFallback:"Your browser can't show the 3D model. Open the page in Chrome or Safari.",
   brAria:"3D model of the HealthNote bracelet. Drag or use arrow keys to rotate", brSpin:"Spin", brAuto:"Auto‑rotate", brReset:"Reset view",
   brColor:"Band colour", brSize:"Size by wrist circumference", brEngrave:"Plate engraving", brEngraveHint:"Up to 18 characters. It appears on the model right away.", brScan:"Scan in an emergency",
   sp1k:"Band", sp1v:"Hypoallergenic medical‑grade silicone", sp2k:"Plate", sp2v:"Stainless steel, laser‑engraved QR code", sp3k:"Water", sp3v:"Safe to wear in the shower and pool",
